@@ -7,11 +7,9 @@ So, to run the practice code :
 2. `cc lex.yy.c -o first -ll`
 
 ### verbRecognize.l
-This lex specification recognizes whether the words in the input are verbs or not.
+This lex specification recognizes whether the words in the input are verbs or not. Now, input is taken from the file `input.txt`.
 
 To run :
 1. `lex verbRecognize.l`
 2. `cc lex.yy.c -o first -ll`
-3. `./first`
-
-Now, provide the input as a line terminated by newline. It then provides the desired output. Hit `Ctrl+C` to terminate.
+3. `./first input.txt`
