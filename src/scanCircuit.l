@@ -4,13 +4,14 @@
 %}
 %option yylineno
 %%
-[ \t]+ ;
+[ \t]+  { printf(" "); };
 
 R[0-9]+ { printf("%s",yytext); }
 C[0-9]+ { printf("%s",yytext); }
 L[0-9]+ { printf("%s",yytext); }
 V[0-9]+ { printf("%s",yytext); }
 I[0-9]+ { printf("%s",yytext); }
+((Net)|(NET))[0-9]+ { printf("%s",yytext); }
 
 .   { ; }
 
