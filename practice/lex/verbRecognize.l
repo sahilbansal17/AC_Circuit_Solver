@@ -32,7 +32,7 @@ go          { printf("%s: is a verb\n", yytext) ; }
 %%
 
 int main(int argc, char* argv[]){
-    yyin = fopen(argv[1], "r"); // input file for lex is yyin and is stdin by default 
+    yyin = fopen(argv[1], "r"); // input file for lex is yyin and is stdin by default
     yylex();
     fclose(yyin);
 }

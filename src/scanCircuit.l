@@ -15,7 +15,7 @@
 %s NET_END
 %s NET_END_NUM
 %s ELEM_VALUE
-%s ELEM_VALUE_UNIT
+%s ELEM_UNIT
 %s SOURCE_VALUE
 %s SV_DC_OFFSET
 %s SV_AMP
@@ -26,7 +26,7 @@
 element [RLC]
 source [VI]
 num [0-9]+
-unit K|N|M|(NF)|(NH)|(MF)|(MH)
+unit K|N|M
 spaces [ \t]+
 net (Net)|(NET)
 decimal ([0-9]+)|([0-9]*\.[0-9]+)
@@ -43,19 +43,19 @@ decimal ([0-9]+)|([0-9]*\.[0-9]+)
 <SOURCE>{source}/{num}    { yylval.ch = strdup(yytext); BEGIN SOURCE_NUM; return SOURCE_TOKEN; }
 <SOURCE_NUM>{num}/{spaces} { yylval.num = atoi(yytext); BEGIN NET_START; return SOURCE_NUM_TOKEN; }
 
-<NET_START>0/{spaces}    { yylval.num = 0; BEGIN NET_END; return NET_START_NUM_TOKEN; }
-<NET_START>{net}/{num}  { yylval.ch = strdup(yytext); BEGIN NET_START_NUM; return NET_START_TOKEN; }
-<NET_START_NUM>{num}/{spaces}   { ECHO; BEGIN NET_END; }
+<NET_START>0/{spaces}    { yylval.num = 0; BEGIN NET_END; return NET_ZERO; }
+<NET_START>{net}/{num}  { yylval.ch = strdup(yytext); BEGIN NET_START_NUM; return NET_TOKEN; }
+<NET_START_NUM>{num}/{spaces}   { yylval.num = atoi(yytext); BEGIN NET_END; return NET_NUM_TOKEN; }
 
-<NET_END>0/{spaces}SINE  { ECHO; BEGIN SOURCE_VALUE; }
-<NET_END>{net}/{num}    { ECHO; BEGIN NET_END_NUM; }
-<NET_END_NUM>{num}/{spaces}SINE { ECHO; BEGIN SOURCE_VALUE; }
-<NET_END>0/{spaces}  { ECHO; BEGIN ELEM_VALUE; }
-<NET_END_NUM>{num}/{spaces} { ECHO; BEGIN ELEM_VALUE; }
+<NET_END>0/{spaces}SINE  { yylval.num = 0; BEGIN SOURCE_VALUE; return NET_ZERO; }
+<NET_END>{net}/{num}    { yylval.ch = strdup(yytext); BEGIN NET_END_NUM; return NET_TOKEN; }
+<NET_END_NUM>{num}/{spaces}SINE { yylval.num = atoi(yytext); BEGIN SOURCE_VALUE; return NET_NUM_TOKEN; }
+<NET_END>0/{spaces}  { yylval.num = 0; BEGIN ELEM_VALUE; return NET_ZERO; }
+<NET_END_NUM>{num}/{spaces} { yylval.num = atoi(yytext); BEGIN ELEM_VALUE; return NET_NUM_TOKEN; }
 
-<ELEM_VALUE>{num}/{spaces}   { ECHO; BEGIN INITIAL; } // for the case that resistor will have no unit mentioned
-<ELEM_VALUE>{num}/{unit}   { ECHO; BEGIN ELEM_VALUE_UNIT; }
-<ELEM_VALUE_UNIT>{unit}/{spaces}    { ECHO; BEGIN INITIAL; }
+<ELEM_VALUE>{num}/{spaces}   { yylval.num = atoi(yytext); BEGIN INITIAL; return RESISTOR_VALUE; } // for the case that resistor will have no unit mentioned
+<ELEM_VALUE>{num}/{unit}?[FH]?   { yylval.num = atoi(yytext); BEGIN ELEM_UNIT; return ELEM_VALUE_TOKEN; } // for ease of error reporting
+<ELEM_UNIT>{unit}?[FH]?/{spaces}    { yylval.ch = strdup(yytext); BEGIN INITIAL; return ELEM_UNIT_TOKEN; }
 
 <SOURCE_VALUE>"("   { ; BEGIN SV_DC_OFFSET; }
 <SV_DC_OFFSET>{decimal}/{spaces}    { ECHO; BEGIN SV_AMP; }
