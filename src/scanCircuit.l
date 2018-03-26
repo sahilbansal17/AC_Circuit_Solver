@@ -1,5 +1,7 @@
 %{
     #include <stdio.h>
+    #include "y.tab.h"
+    #define YY_DECL extern "C" int yylex()
     void yyerror(char *);
 %}
 %option yylineno
@@ -32,17 +34,17 @@ decimal ([0-9]+)|([0-9]*\.[0-9]+)
 %%
 <INITIAL>{spaces}/{element}   { BEGIN ELEMENT; }
 <INITIAL>{spaces}/{source}   { BEGIN SOURCE; }
-<INITIAL>{element}/{num} { ECHO; BEGIN ELEMENT_NUM; }
-<INITIAL>{source}/{num}  { ECHO; BEGIN SOURCE_NUM; }
+<INITIAL>{element}/{num} { yylval.ch = strdup(yytext); BEGIN ELEMENT_NUM; return ELEMENT_TOKEN; }
+<INITIAL>{source}/{num}  { yylval.ch = strdup(yytext); BEGIN SOURCE_NUM; return SOURCE_TOKEN; }
 {spaces}  { printf(" "); };
 
-<ELEMENT>{element}/{num}    { ECHO; BEGIN ELEMENT_NUM; }
-<ELEMENT_NUM>{num}/{spaces} { ECHO; BEGIN NET_START; }
-<SOURCE>{source}/{num}    { ECHO; BEGIN SOURCE_NUM; }
-<SOURCE_NUM>{num}/{spaces} { ECHO; BEGIN NET_START; }
+<ELEMENT>{element}/{num}    { yylval.ch = strdup(yytext); BEGIN ELEMENT_NUM; return ELEMENT_TOKEN; }
+<ELEMENT_NUM>{num}/{spaces} { yylval.num = atoi(yytext); BEGIN NET_START; return ELEMENT_NUM_TOKEN; }
+<SOURCE>{source}/{num}    { yylval.ch = strdup(yytext); BEGIN SOURCE_NUM; return SOURCE_TOKEN; }
+<SOURCE_NUM>{num}/{spaces} { yylval.num = atoi(yytext); BEGIN NET_START; return SOURCE_NUM_TOKEN; }
 
-<NET_START>0/{spaces}    { ECHO; BEGIN NET_END; }
-<NET_START>{net}/{num}  { ECHO; BEGIN NET_START_NUM; }
+<NET_START>0/{spaces}    { yylval.num = 0; BEGIN NET_END; return NET_START_NUM_TOKEN; }
+<NET_START>{net}/{num}  { yylval.ch = strdup(yytext); BEGIN NET_START_NUM; return NET_START_TOKEN; }
 <NET_START_NUM>{num}/{spaces}   { ECHO; BEGIN NET_END; }
 
 <NET_END>0/{spaces}SINE  { ECHO; BEGIN SOURCE_VALUE; }
@@ -69,10 +71,4 @@ decimal ([0-9]+)|([0-9]*\.[0-9]+)
 
 int yywrap(void) {
     return 1;
-}
-
-int main(int argc, char* argv[]){
-    yyin = fopen(argv[1], "r"); // input file for lex is yyin and is stdin by default
-    yylex();
-    fclose(yyin);
 }
