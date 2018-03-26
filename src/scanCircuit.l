@@ -3,15 +3,45 @@
     void yyerror(char *);
 %}
 %option yylineno
-%%
-[ \t]+  { printf(" "); };
 
-R[0-9]+ { printf("%s",yytext); }
-C[0-9]+ { printf("%s",yytext); }
-L[0-9]+ { printf("%s",yytext); }
-V[0-9]+ { printf("%s",yytext); }
-I[0-9]+ { printf("%s",yytext); }
-((Net)|(NET))[0-9]+ { printf("%s",yytext); }
+%s ELEMENT
+%s ELEMENT_NUM
+%s SOURCE
+%s SOURCE_NUM
+%s NET_START
+%s NET_START_NUM
+%s NET_END
+%s NET_END_NUM
+%s ELEM_VALUE
+%s ELEM_VALUE_UNIT
+%s SOURCE_VALUE
+
+element [RLC]
+source [VI]
+num [0-9]+
+unit K|N|M|(NF)|(NH)|(MF)|(MH)
+spaces [ \t]+
+net (Net)|(NET)
+
+%%
+<INITIAL>{spaces}/{element}   { BEGIN ELEMENT; }
+<INITIAL>{spaces}/{source}   { BEGIN SOURCE; }
+{spaces}  { printf(" "); };
+
+<ELEMENT>{element}/{num}    { ECHO; BEGIN ELEMENT_NUM; }
+<ELEMENT_NUM>{num}/{spaces} { ECHO; BEGIN NET_START; }
+
+<NET_START>0{spaces}    { ECHO; BEGIN NET_END; }
+<NET_START>{net}/{num}  { ECHO; BEGIN NET_START_NUM; }
+<NET_START_NUM>{num}/{spaces}   { ECHO; BEGIN NET_END; }
+
+<NET_END>0{spaces}  { ECHO; BEGIN ELEM_VALUE; }
+<NET_END>{net}/{num}    { ECHO; BEGIN NET_END_NUM; }
+<NET_END_NUM>{num}/{spaces} { ECHO; BEGIN ELEM_VALUE; }
+
+<ELEM_VALUE>{num}/{spaces}   { ECHO; BEGIN INITIAL; } // for the case that resistor will have no unit mentioned
+<ELEM_VALUE>{num}/{unit}   { ECHO; BEGIN ELEM_VALUE_UNIT; }
+<ELEM_VALUE_UNIT>{unit}/{spaces}    { ECHO; BEGIN INITIAL; }
 
 .   { ; }
 
