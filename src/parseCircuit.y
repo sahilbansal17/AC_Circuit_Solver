@@ -10,6 +10,8 @@
     vector <source> sourceElements;
     element tempE;
     source tempS;
+    bool error;
+    int numErrors = 0;
 %}
 
 %union{
@@ -43,10 +45,10 @@ connection:
             | source sourceNet sourceValue
 
 element:
-        ELEMENT_TOKEN ELEMENT_NUM_TOKEN { tempE.elementName = $1; tempE.elementNum = $2; }
+        ELEMENT_TOKEN ELEMENT_NUM_TOKEN { error = 0; tempE.elementName = $1; tempE.elementNum = $2; }
 
 source:
-        SOURCE_TOKEN SOURCE_NUM_TOKEN { tempS.sourceName = $1; tempS.sourceNum = $2; }
+        SOURCE_TOKEN SOURCE_NUM_TOKEN { error = 0; tempS.sourceName = $1; tempS.sourceNum = $2; }
 
 elementNet:
         elementNetStart elementNetEnd
@@ -70,15 +72,17 @@ sourceNetEnd:
         | NET_ZERO  { tempS.netEnd = 0; }
 
 elementValue:
-        RESISTOR_VALUE  { if(tempE.elementName[0] == 'R'){ tempE.value = $1; tempE.unit = strdup("1"); } else { yyerror("No unit is specified, only possible for resistor.\n"); } }
-        | ELEM_VALUE_TOKEN ELEM_UNIT_TOKEN    { tempE.value = $1;  tempE.unit = $2; if(tempE.elementName[0] == 'R'){ if($2[1] || ($2[0]!='K' && $2[0]!= 'N' && $2[0]!='M')) yyerror("Incorrect unit.\n"); } else if(tempE.elementName[0] == 'L') { if( ($2[1] && $2[1]!='H' && ($2[0]!='K' && $2[0]!='N' && $2[0]!='M') ) || (!$2[1] && $2[0]!='H') ) yyerror("Incorrect unit.\n"); } else if(tempE.elementName[0] == 'C'){ if( ($2[1] && $2[1]!='F' && ($2[0]!='K' && $2[0]!='N' && $2[0]!='M') ) || (!$2[1] && $2[0]!='F') ) yyerror("Incorrect unit.\n"); } }
+        RESISTOR_VALUE  { if(tempE.elementName[0] == 'R'){ tempE.value = $1; tempE.unit = strdup("1"); } else { yyerror("No unit is specified, only possible for resistor.\n"); } if(!error) circuitElements.push_back(tempE); }
+        | ELEM_VALUE_TOKEN ELEM_UNIT_TOKEN    { tempE.value = $1;  tempE.unit = $2; if(tempE.elementName[0] == 'R'){ if($2[1] || ($2[0]!='K' && $2[0]!= 'N' && $2[0]!='M')) yyerror("Incorrect unit.\n"); } else if(tempE.elementName[0] == 'L') { if( ($2[1] && $2[1]!='H' && ($2[0]!='K' && $2[0]!='N' && $2[0]!='M') ) || (!$2[1] && $2[0]!='H') ) yyerror("Incorrect unit.\n"); } else if(tempE.elementName[0] == 'C'){ if( ($2[1] && $2[1]!='F' && ($2[0]!='K' && $2[0]!='N' && $2[0]!='M') ) || (!$2[1] && $2[0]!='F') ) yyerror("Incorrect unit.\n"); } if(!error) circuitElements.push_back(tempE); }
 
 sourceValue:
-        DC_OFFSET_TOK AMP_TOKEN FREQ_TOKEN DELAY_TOK    { tempS.dcOffset = $1, tempS.amplitude = $2, tempS.freq = $3, tempS.delay = $4, tempS.dampingFactor = 0.0; }
-        | DC_OFFSET_TOK AMP_TOKEN FREQ_TOKEN DELAY_TOK DAMPING_TOK  { tempS.dcOffset = $1, tempS.amplitude = $2, tempS.freq = $3, tempS.delay = $4, tempS.dampingFactor = $5; }
+        DC_OFFSET_TOK AMP_TOKEN FREQ_TOKEN DELAY_TOK    { tempS.dcOffset = $1, tempS.amplitude = $2, tempS.freq = $3, tempS.delay = $4, tempS.dampingFactor = 0.0; if(!error) sourceElements.push_back(tempS); }
+        | DC_OFFSET_TOK AMP_TOKEN FREQ_TOKEN DELAY_TOK DAMPING_TOK  { tempS.dcOffset = $1, tempS.amplitude = $2, tempS.freq = $3, tempS.delay = $4, tempS.dampingFactor = $5; if(!error) sourceElements.push_back(tempS); }
 
 %%
 void yyerror(char *s){
+    error = 1;
+    numErrors ++;
     extern int yylineno;
     fprintf(stderr, "Line Number %d: %s\n",yylineno, s);
 }
@@ -86,8 +90,22 @@ void yyerror(char *s){
 int main(int argc, char** argv){
     yyin = fopen(argv[1], "r");
     yyparse();
-    printf("%s->%d->NetStart:%d->NetEnd:%d->Value:%d->Unit:%s\n",tempE.elementName, tempE.elementNum, tempE.netStart, tempE.netEnd, tempE.value, tempE.unit);
+    /* printf("%s->%d->NetStart:%d->NetEnd:%d->Value:%d->Unit:%s\n",tempE.elementName, tempE.elementNum, tempE.netStart, tempE.netEnd, tempE.value, tempE.unit);
 
-    printf("%s->%d->NetStart:%d->NetEnd:%d->dcOffset:%f->Amp:%f->Freq:%f->Delay:%f->Damping:%f\n",tempS.sourceName, tempS.sourceNum, tempS.netStart, tempS.netEnd, tempS.dcOffset, tempS.amplitude, tempS.freq, tempS.delay, tempS.dampingFactor);
+    printf("%s->%d->NetStart:%d->NetEnd:%d->dcOffset:%f->Amp:%f->Freq:%f->Delay:%f->Damping:%f\n",tempS.sourceName, tempS.sourceNum, tempS.netStart, tempS.netEnd, tempS.dcOffset, tempS.amplitude, tempS.freq, tempS.delay, tempS.dampingFactor); */
+    
+    if(numErrors == 0){
+        printf("\nElements:\n");
+        for(int i = 0 ; i < circuitElements.size(); i ++){
+            element tempE = circuitElements[i];
+            printf("%s->%d->NetStart:%d->NetEnd:%d->Value:%d->Unit:%s\n",tempE.elementName, tempE.elementNum, tempE.netStart, tempE.netEnd, tempE.value, tempE.unit);
+        }
+        printf("\nSource:\n");
+        for(int i = 0 ; i < sourceElements.size(); i ++){
+            source tempS = sourceElements[i];
+            printf("%s->%d->NetStart:%d->NetEnd:%d->dcOffset:%f->Amp:%f->Freq:%f->Delay:%f->Damping:%f\n",tempS.sourceName, tempS.sourceNum, tempS.netStart, tempS.netEnd, tempS.dcOffset, tempS.amplitude, tempS.freq, tempS.delay, tempS.dampingFactor);
+        }
+        printf("\n\n");
+    }
     fclose(yyin);
 }
