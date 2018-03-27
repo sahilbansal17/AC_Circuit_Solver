@@ -58,8 +58,8 @@ elementNetStart:
         | NET_ZERO  { tempE.netStart = 0; }
 
 elementNetEnd:
-        NET_TOKEN NET_NUM_TOKEN { tempE.netEnd = $2; }
-        | NET_ZERO  { tempE.netEnd = 0; }
+        NET_TOKEN NET_NUM_TOKEN { tempE.netEnd = $2; if(tempE.netEnd == tempE.netStart) yyerror("starting and ending net can't be same."); }
+        | NET_ZERO  { tempE.netEnd = 0; if(tempE.netEnd == tempE.netStart) yyerror("starting and ending net can't be same."); }
 
 sourceNet:
         sourceNetStart sourceNetEnd
@@ -68,8 +68,8 @@ sourceNetStart:
         NET_TOKEN NET_NUM_TOKEN { tempS.netStart = $2; }
         | NET_ZERO  { tempS.netStart = 0; }
 sourceNetEnd:
-        NET_TOKEN NET_NUM_TOKEN { tempS.netEnd = $2; }
-        | NET_ZERO  { tempS.netEnd = 0; }
+        NET_TOKEN NET_NUM_TOKEN { tempS.netEnd = $2; if(tempS.netEnd == tempS.netStart) yyerror("starting and ending net can't be same."); }
+        | NET_ZERO  { tempS.netEnd = 0; if(tempS.netEnd == tempS.netStart) yyerror("starting and ending net can't be same."); }
 
 elementValue:
         RESISTOR_VALUE  { if(tempE.elementName[0] == 'R'){ tempE.value = $1; tempE.unit = strdup("1"); } else { yyerror("No unit is specified, only possible for resistor.\n"); } if(!error) circuitElements.push_back(tempE); }
@@ -87,13 +87,20 @@ void yyerror(char *s){
     fprintf(stderr, "Line Number %d: %s\n",yylineno, s);
 }
 
-int main(int argc, char** argv){
+int parse(char* fileName){
+    yyin = fopen(fileName, "r");
+    if(!yyin){
+        fprintf(stderr, "No such input file exists!\n");
+        return -1;
+    }
+    yyparse();
+    if(numErrors > 0) return -1;
+    return 1; // success
+}
+
+/* int main(int argc, char** argv){
     yyin = fopen(argv[1], "r");
     yyparse();
-    /* printf("%s->%d->NetStart:%d->NetEnd:%d->Value:%d->Unit:%s\n",tempE.elementName, tempE.elementNum, tempE.netStart, tempE.netEnd, tempE.value, tempE.unit);
-
-    printf("%s->%d->NetStart:%d->NetEnd:%d->dcOffset:%f->Amp:%f->Freq:%f->Delay:%f->Damping:%f\n",tempS.sourceName, tempS.sourceNum, tempS.netStart, tempS.netEnd, tempS.dcOffset, tempS.amplitude, tempS.freq, tempS.delay, tempS.dampingFactor); */
-    
     if(numErrors == 0){
         printf("\nElements:\n");
         for(int i = 0 ; i < circuitElements.size(); i ++){
@@ -108,4 +115,4 @@ int main(int argc, char** argv){
         printf("\n\n");
     }
     fclose(yyin);
-}
+} */

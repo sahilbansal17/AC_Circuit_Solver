@@ -25,4 +25,4 @@ extern vector <element> circuitElements;
 extern vector <source> sourceElements;
 
 // the function to be called to parse the netlist fill the vectors
-extern int parse(void);
+extern int parse(char* fileName);
