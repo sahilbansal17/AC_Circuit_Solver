@@ -36,7 +36,7 @@ decimal ([0-9]+)|([0-9]*\.[0-9]+)
 <INITIAL>{spaces}/{source}   { BEGIN SOURCE; }
 <INITIAL>{element}/{num} { yylval.ch = strdup(yytext); BEGIN ELEMENT_NUM; return ELEMENT_TOKEN; }
 <INITIAL>{source}/{num}  { yylval.ch = strdup(yytext); BEGIN SOURCE_NUM; return SOURCE_TOKEN; }
-{spaces}  { printf(" "); };
+{spaces}  ;
 
 <ELEMENT>{element}/{num}    { yylval.ch = strdup(yytext); BEGIN ELEMENT_NUM; return ELEMENT_TOKEN; }
 <ELEMENT_NUM>{num}/{spaces} { yylval.num = atoi(yytext); BEGIN NET_START; return ELEMENT_NUM_TOKEN; }
@@ -53,19 +53,23 @@ decimal ([0-9]+)|([0-9]*\.[0-9]+)
 <NET_END>0/{spaces}  { yylval.num = 0; BEGIN ELEM_VALUE; return NET_ZERO; }
 <NET_END_NUM>{num}/{spaces} { yylval.num = atoi(yytext); BEGIN ELEM_VALUE; return NET_NUM_TOKEN; }
 
-<ELEM_VALUE>{num}/{spaces}   { yylval.num = atoi(yytext); BEGIN INITIAL; return RESISTOR_VALUE; } // for the case that resistor will have no unit mentioned
-<ELEM_VALUE>{num}/{unit}?[FH]?   { yylval.num = atoi(yytext); BEGIN ELEM_UNIT; return ELEM_VALUE_TOKEN; } // for ease of error reporting
-<ELEM_UNIT>{unit}?[FH]?/{spaces}    { yylval.ch = strdup(yytext); BEGIN INITIAL; return ELEM_UNIT_TOKEN; }
+<ELEM_VALUE>{num}   { yylval.num = atoi(yytext); BEGIN INITIAL; return RESISTOR_VALUE; } // for the case that resistor will have no unit mentioned  
+<ELEM_VALUE>{num}/{unit}?[FH]?   { yylval.num = atoi(yytext); BEGIN ELEM_UNIT; return ELEM_VALUE_TOKEN; } // for ease of error reporting  
+<ELEM_UNIT>{unit}?[FH]?    { yylval.ch = strdup(yytext); BEGIN INITIAL; return ELEM_UNIT_TOKEN; }  // since spaces will note necessarily follow the unit, it could lead to many bugs 
 
 <SOURCE_VALUE>"("   { ; BEGIN SV_DC_OFFSET; }
-<SV_DC_OFFSET>{decimal}/{spaces}    { ECHO; BEGIN SV_AMP; }
-<SV_AMP>{decimal}/{spaces}    { ECHO; BEGIN SV_FREQ; }
-<SV_FREQ>{decimal}(Khz)    { ECHO; BEGIN SV_DELAY; }
-<SV_DELAY>{decimal}S/(")"|{spaces}")")    { ECHO; BEGIN INITIAL; }
-<SV_DELAY>{decimal}S    { ECHO; BEGIN SV_DAMPING; }
-<SV_DAMPING>{decimal}/(")"|{spaces}")") { ECHO; BEGIN INITIAL; }
+<SV_DC_OFFSET>{decimal}/{spaces}    { yylval.dec = atof(yytext); BEGIN SV_AMP; return DC_OFFSET_TOK; }
+<SV_AMP>{decimal}/{spaces}    { yylval.dec = atof(yytext); BEGIN SV_FREQ; return AMP_TOKEN; }
+<SV_FREQ>{decimal}((Khz)|(KHz))    { yylval.dec = atof(yytext); BEGIN SV_DELAY; return FREQ_TOKEN; }
+<SV_DELAY>{decimal}S/(")"|{spaces}")")    { yylval.dec = atof(yytext); BEGIN INITIAL; return DELAY_TOK; }
+<SV_DELAY>{decimal}S    { yylval.dec = atof(yytext); BEGIN SV_DAMPING; return DELAY_TOK; }
+<SV_DAMPING>{decimal}/(")"|{spaces}")") { yylval.dec = atof(yytext); BEGIN INITIAL; return DAMPING_TOK; }
 
-.   { ; }
+<INITIAL>")"   { ; } // consume ")" 
+<SOURCE_VALUE>SINE { ; } // consume "SINE" 
+
+\n { ; } // so that yylineno increments after each line 
+.   { char msg[25]; sprintf(msg, "%s, <%s>", "invalid character", yytext); yyerror(msg); }
 
 %%
 
