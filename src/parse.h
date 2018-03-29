@@ -3,6 +3,7 @@
     given netlist input to extract the tokens and work on them.
 */
 #include <vector>
+#include <complex>
 using namespace std;
 
 // structure for element to be used in scanning and parsing
@@ -10,6 +11,9 @@ struct element{
     char* elementName;
     int elementNum, netStart, netEnd, value;
     char* unit;
+    
+    complex <double> current, voltage; // the part required for solving the circuit 
+    double valWithUnit;  
 };
 
 // structure for source to be used in scanning and parsing
@@ -18,6 +22,9 @@ struct source{
     int sourceNum, netStart, netEnd;
     double dcOffset, amplitude, freq, delay, dampingFactor;
     // assuming freq in Khz only and delay in S only
+    
+    // currently assuming dcOffset = 0 
+    complex <double> current, voltage; // part required for solving the circuit 
 };
 
 // the vector storing the element/source connections

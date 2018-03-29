@@ -4,7 +4,7 @@ CFLAGS = -std=c++11 -w
 execute:
 	yacc -d src/parseCircuit.y
 	lex src/scanCircuit.l
-	$(CXX) lex.yy.c y.tab.c src/draw.cpp -o first $(CFLAGS)
+	$(CXX) lex.yy.c y.tab.c src/ac_circuit_solver.cpp -o first $(CFLAGS)
 clean:
 	rm first
 runAll:
