@@ -116,7 +116,7 @@ int main(int argc, char** argv){
     
     // now we will use the Eigen library functions to construct the required matrices in the modified nodal analysis method 
     
-    double omega = vSource[0].freq;
+    double omega = 2*pi*vSource[0].freq;
     
     /* for interconnections between passive circuit elements */
     MatrixXcd G(totalNodes, totalNodes); // x-arbitrary_size, c-complex, d-double
@@ -190,21 +190,25 @@ int main(int argc, char** argv){
         E(i, 0) = vSource[i].amplitude;
         int ns = vSource[i].netStart;
         int ne = vSource[i].netEnd;
+        complex <double> One(1, 0);
         if(ns != 0 && ne != 0){
-            C(i, ns - 1) += 1;
-            C(i, ne - 1) += -1;
+            C(i, ns - 1) += One;
+            B(ns - 1, i) += One;
+            C(i, ne - 1) -= One;
+            B(ne - 1, i) -= One;
         }
         else if(ns == 0){
-            C(i, ne - 1) += -1;
+            C(i, ne - 1) -= One;
+            B(ne - 1, i) -= One;
         }
         else if(ne == 0){
-            C(i, ns - 1) += 1;
+            C(i, ns - 1) += One;
+            B(ns - 1, i) += One;
         }
     }
     
-    B = C.transpose();
-    
-    // for knowing whether the program works fine till now, we need to print the matrices formed till now 
+    /*
+    for knowing whether the program works fine till now, we need to print the matrices formed till now 
     
     cout << "G : \n";
     for(int i = 0 ; i < totalNodes; i ++){
@@ -217,7 +221,7 @@ int main(int argc, char** argv){
     cout << "\nC : \n";
     for(int i = 0 ; i < totalVoltageSources; i ++){
         for(int j = 0 ; j < totalNodes; j ++){
-            cout << B(i, j) << " ";
+            cout << C(i, j) << " ";
         }
         cout << "\n";
     }
@@ -226,6 +230,107 @@ int main(int argc, char** argv){
     for(int i = 0 ; i < totalVoltageSources ; i ++){
         for(int j = 0 ; j < 1; j ++){
             cout << E(i, j) << " ";
+        }
+        cout << "\n";
+    }
+    
+    */
+    
+    /*
+    Matrix D just contains all zeroes (all sources independent)
+    */
+    MatrixXcd D(totalVoltageSources, totalVoltageSources);
+    D = MatrixXd::Constant(totalVoltageSources, totalVoltageSources, 0);
+    
+    /*
+    Matrix A => |G  B|
+                |C  D|
+    */
+    MatrixXcd A(totalNodes + totalVoltageSources, totalNodes + totalVoltageSources);
+    for(int i = 0 ; i < totalNodes; i ++){
+        for(int j = 0 ; j < totalNodes ; j ++){
+            A(i, j) = G(i, j);
+        }
+    }
+    for(int i = totalNodes; i < totalNodes + totalVoltageSources; i ++){
+        for(int j = 0; j < totalNodes ; j ++){
+            A(i, j) = C(i - totalNodes, j);
+        }
+    }
+    for(int i = 0 ; i < totalNodes ; i ++){
+        for(int j = totalNodes ; j < totalNodes + totalVoltageSources ; j ++){
+            A(i, j) = B(i, j - totalNodes);
+        }
+    }
+    for(int i = totalNodes ; i < totalNodes + totalVoltageSources ; i ++){
+        for(int j = totalNodes ; j < totalNodes + totalVoltageSources ; j ++){
+            A(i, j) = D(i - totalNodes, j - totalNodes);
+        }
+    }
+    
+    cout << "\nA : \n";
+    for(int i = 0 ; i < totalVoltageSources + totalNodes; i ++){
+        for(int j = 0 ; j < totalNodes + totalVoltageSources; j ++){
+            cout << A(i, j) << " ";
+        }
+        cout << "\n";
+    }
+    
+    /*
+    Matrix Z (which contains the known values of current sources and voltages)
+    Z = [I  E] transpose 
+    where   I contains net outward current at each node (either 0 or value of current source) 
+            E contains the voltage source values, already declared earlier 
+    */
+    
+    MatrixXcd Z(totalNodes + totalVoltageSources, 1);
+    MatrixXcd I(totalNodes, 1);
+    I = MatrixXd::Constant(totalNodes, 1, 0);
+    
+    for(int i = 0 ; i < iSource.size(); i ++){
+        int ns = iSource[i].netStart;
+        int ne = iSource[i].netEnd;
+        if(ns != 0 && ne != 0){
+            I(ns - 1, 0) += iSource[i].amplitude;
+            I(ne - 1, 0) -= iSource[i].amplitude;
+        }
+        else if(ns == 0){
+            I(ne - 1, 0) -= iSource[i].amplitude;
+        }
+        else if(ne == 0){
+            I(ns - 1, 0) += iSource[i].amplitude;
+        }
+    }
+    
+    for(int i = 0 ; i < totalNodes ; i ++){
+        Z(i, 0) = I(i, 0);
+    }
+    for(int i = totalNodes; i < totalNodes + totalVoltageSources ; i ++){
+        Z(i, 0) = E(i - totalNodes, 0);
+    }
+    
+    cout << "\nZ : \n";
+    for(int i = 0 ; i < totalVoltageSources + totalNodes; i ++){
+        for(int j = 0 ; j < 1; j ++){
+            cout << Z(i, j) << " ";
+        }
+        cout << "\n";
+    }
+    /*
+        Matrix X will be obtained by solving 
+            AX = Z
+        It will be of the size (n + m) * 1 where n : totalNodes, m : totalVoltageSources
+        So, the first n elements will give the node voltages 
+        and the next m elements will give the currents flowing from the positive terminal of battery to its negative terminal (from inside) as convention 
+    */
+    
+    MatrixXcd X(totalNodes + totalVoltageSources, 1);
+    X = A.colPivHouseholderQr().solve(Z); // used to solve AX = Z    
+    
+    cout << "\nX : \n";
+    for(int i = 0 ; i < totalVoltageSources + totalNodes; i ++){
+        for(int j = 0 ; j < 1; j ++){
+            cout << abs(X(i, j)) << " ";
         }
         cout << "\n";
     }
