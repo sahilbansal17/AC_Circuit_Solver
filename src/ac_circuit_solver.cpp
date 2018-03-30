@@ -9,8 +9,8 @@
 #include "parse.h"
 
 #define KILO 1000.0
-#define NANO 10e-9
-#define MILLI 10e-3
+#define NANO 0.000000001
+#define MILLI 0.001
 
 using namespace std;
 using namespace Eigen;
@@ -41,6 +41,18 @@ double phase(complex <double> &c){
     return res;
 }
 
+// functions for rounding decimal upto 3 places 
+inline double round_3(double val){
+    double val_mul_1000 = val * 1000.0;
+    if(val_mul_1000 < 0){
+        val_mul_1000 = ceil(val_mul_1000 - 0.5);
+    }
+    else{
+        val_mul_1000 = floor(val_mul_1000 + 0.5);
+    }
+    return val_mul_1000/1000.0 ; 
+}
+
 int main(int argc, char** argv){
     
     // first of all check whether draw returned success status 
@@ -52,10 +64,23 @@ int main(int argc, char** argv){
     int status = parse(argv[1]);
     if(status == -1){
         cout << "\nErrors in input netlist...aborting!\n";
+        return 0;
     }
     
     /* INITIALIZATION */
     vector <source> vSource, iSource; // seperate the two types of sources
+    
+    printf("\nElements:\n");
+    for(int i = 0 ; i < circuitElements.size(); i ++){
+        element tempE = circuitElements[i];
+        printf("%s->%d->NetStart:%d->NetEnd:%d->Value:%d->Unit:%s\n",tempE.elementName, tempE.elementNum, tempE.netStart, tempE.netEnd, tempE.value, tempE.unit);
+    }
+    printf("\nSource:\n");
+    for(int i = 0 ; i < sourceElements.size(); i ++){
+        source tempS = sourceElements[i];
+        printf("%s->%d->NetStart:%d->NetEnd:%d->dcOffset:%f->Amp:%f->Freq:%f->Delay:%f->Damping:%f\n",tempS.sourceName, tempS.sourceNum, tempS.netStart, tempS.netEnd, tempS.dcOffset, tempS.amplitude, tempS.freq, tempS.delay, tempS.dampingFactor);
+    }
+    printf("\n\n");
     
     // assing proper value to the circuit elements 
     for(int i = 0 ; i < circuitElements.size(); i ++){
@@ -116,7 +141,7 @@ int main(int argc, char** argv){
     
     // now we will use the Eigen library functions to construct the required matrices in the modified nodal analysis method 
     
-    double omega = 2*pi*vSource[0].freq;
+    double omega = 2*pi*vSource[0].freq*KILO;
     
     /* for interconnections between passive circuit elements */
     MatrixXcd G(totalNodes, totalNodes); // x-arbitrary_size, c-complex, d-double
@@ -187,7 +212,10 @@ int main(int argc, char** argv){
     */
     
     for(int i = 0 ; i < vSource.size(); i ++){
-        E(i, 0) = vSource[i].amplitude;
+        double mag = vSource[i].amplitude;
+        // double re = mag*cos(omega), im = mag*sin(omega);
+        // E(i, 0) = complex <double> (re, im);
+        E(i, 0) = mag;
         int ns = vSource[i].netStart;
         int ne = vSource[i].netEnd;
         complex <double> One(1, 0);
@@ -290,6 +318,7 @@ int main(int argc, char** argv){
     for(int i = 0 ; i < iSource.size(); i ++){
         int ns = iSource[i].netStart;
         int ne = iSource[i].netEnd;
+        // if current flows from netEnd to netStart 
         if(ns != 0 && ne != 0){
             I(ns - 1, 0) += iSource[i].amplitude;
             I(ne - 1, 0) -= iSource[i].amplitude;
@@ -327,12 +356,43 @@ int main(int argc, char** argv){
     MatrixXcd X(totalNodes + totalVoltageSources, 1);
     X = A.colPivHouseholderQr().solve(Z); // used to solve AX = Z    
     
+    // changing the direction of current assumed wrongly for convenience across the voltage sources 
+    for(int i = totalNodes ; i < totalNodes + totalVoltageSources ; i ++){
+        double re = -X(i, 0).real(), im = -X(i, 0).imag();
+        complex <double> temp(re, im);
+        X(i, 0) = temp;
+    }
+    
+    // store the node voltages in the appropriate vector 
+    for(int i = 0 ; i < totalNodes ; i ++){
+        VoltageNode[i+1] = X(i, 0);
+    }
+    
     cout << "\nX : \n";
     for(int i = 0 ; i < totalVoltageSources + totalNodes; i ++){
         for(int j = 0 ; j < 1; j ++){
             cout << abs(X(i, j)) << " ";
         }
         cout << "\n";
+    }
+    
+    // print voltages on the screen 
+    cout << "\n";
+    cout << "VOLTAGES OF ELEMENTS\n";
+    for(int i = 0; i < circuitElements.size(); i ++){
+        int ns = circuitElements[i].netStart;
+        int ne = circuitElements[i].netEnd;
+        cout << circuitElements[i].elementName[0] << circuitElements[i].elementNum << " ";
+        complex <double> voltDiff = VoltageNode[ns] - VoltageNode[ne];
+        cout << round_3(abs(voltDiff)) << " " << round_3(phase(voltDiff)) << "\n";
+    }
+    cout << "\nVOLTAGES OF SOURCES\n";
+    for(int i = 0 ; i < sourceElements.size(); i ++){
+        int ns = sourceElements[i].netStart;
+        int ne = sourceElements[i].netEnd;
+        cout << sourceElements[i].sourceName[0] << sourceElements[i].sourceNum << " ";
+        complex <double> voltDiff = VoltageNode[ns] - VoltageNode[ne];
+        cout << round_3(abs(voltDiff)) << " " << round_3(phase(voltDiff)) << "\n";        
     }
     return 0;
 }
