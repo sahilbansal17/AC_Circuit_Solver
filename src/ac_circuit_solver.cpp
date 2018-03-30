@@ -148,7 +148,8 @@ int main(int argc, char** argv){
     }
     
     // call the main draw function to render netlist as svg 
-    drawMain(totalNodes, circuitElements, iSource, vSource);
+    drawMain(totalNodes + 1, circuitElements, iSource, vSource);
+    // since 0 is not included in totalNodes
     
     // now we will use the Eigen library functions to construct the required matrices in the modified nodal analysis method 
     
