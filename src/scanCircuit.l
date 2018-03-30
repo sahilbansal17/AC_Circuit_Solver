@@ -53,8 +53,8 @@ decimal ([0-9]+)|([0-9]*\.[0-9]+)
 <NET_END>0/{spaces}  { yylval.num = 0; BEGIN ELEM_VALUE; return NET_ZERO; }
 <NET_END_NUM>{num}/{spaces} { yylval.num = atoi(yytext); BEGIN ELEM_VALUE; return NET_NUM_TOKEN; }
 
-<ELEM_VALUE>{num}   { yylval.num = atoi(yytext); BEGIN INITIAL; return RESISTOR_VALUE; } // for the case that resistor will have no unit mentioned  
-<ELEM_VALUE>{num}/{unit}?[FH]?   { yylval.num = atoi(yytext); BEGIN ELEM_UNIT; return ELEM_VALUE_TOKEN; } // for ease of error reporting  
+<ELEM_VALUE>{decimal}   { yylval.dec = atof(yytext); BEGIN INITIAL; return RESISTOR_VALUE; } // for the case that resistor will have no unit mentioned  
+<ELEM_VALUE>{decimal}/{unit}?[FH]?   { yylval.dec = atof(yytext); BEGIN ELEM_UNIT; return ELEM_VALUE_TOKEN; } // for ease of error reporting  
 <ELEM_UNIT>{unit}?[FH]?    { yylval.ch = strdup(yytext); BEGIN INITIAL; return ELEM_UNIT_TOKEN; }  // since spaces will note necessarily follow the unit, it could lead to many bugs 
 
 <SOURCE_VALUE>"("   { ; BEGIN SV_DC_OFFSET; }

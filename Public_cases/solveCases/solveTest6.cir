@@ -1,0 +1,6 @@
+V1 Net3 0 SINE ( 0 30 0.159Khz 0.0S )
+R1 Net1 Net0 5
+R2 Net3 Net2 3
+C2 Net2 Net1 4NF
+C1 Net1 0 6NF
+L1 Net1 0 5MH

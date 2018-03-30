@@ -26,9 +26,9 @@
 %token <ch> NET_TOKEN
 %token <num> NET_NUM_TOKEN
 %token <num> NET_ZERO
-%token <num> ELEM_VALUE_TOKEN
+%token <dec> ELEM_VALUE_TOKEN
 %token <ch> ELEM_UNIT_TOKEN
-%token <num> RESISTOR_VALUE
+%token <dec> RESISTOR_VALUE
 %token <dec> DC_OFFSET_TOK
 %token <dec> AMP_TOKEN
 %token <dec> FREQ_TOKEN

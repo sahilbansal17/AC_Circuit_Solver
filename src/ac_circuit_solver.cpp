@@ -21,12 +21,12 @@ double pi = 4*atan(1); // atan is defined in complex library
 double phase(complex <double> &c){
     double im = c.imag(), re = c.real();
     if(im == 0){
-        if(re > 0)
+        if(re >= 0)
             return 0;
         return 180;
     }
     else if(re == 0){
-        if(im > 0)
+        if(im >= 0)
             return 90;
         return -90;
     }
@@ -53,6 +53,10 @@ inline double round_3(double val){
     return val_mul_1000/1000.0 ; 
 }
 
+// comparison function to sort the sources based on frequencies 
+bool compareByFreq(const source &a, const source &b){
+    return a.freq <= b.freq;
+}
 int main(int argc, char** argv){
     
     // first of all check whether draw returned success status 
@@ -73,7 +77,7 @@ int main(int argc, char** argv){
     printf("\nElements:\n");
     for(int i = 0 ; i < circuitElements.size(); i ++){
         element tempE = circuitElements[i];
-        printf("%s->%d->NetStart:%d->NetEnd:%d->Value:%d->Unit:%s\n",tempE.elementName, tempE.elementNum, tempE.netStart, tempE.netEnd, tempE.value, tempE.unit);
+        printf("%s->%d->NetStart:%d->NetEnd:%d->Value:%f->Unit:%s\n",tempE.elementName, tempE.elementNum, tempE.netStart, tempE.netEnd, tempE.value, tempE.unit);
     }
     printf("\nSource:\n");
     for(int i = 0 ; i < sourceElements.size(); i ++){
@@ -99,6 +103,10 @@ int main(int argc, char** argv){
                     break;
         }
     }
+    
+    // handling multiple sources with different frequencies 
+    // sort the sources in increasing order of their frequencies 
+    sort(sourceElements.begin(), sourceElements.end(), compareByFreq);
     
     // find the maximum no of nodes in the circuit 
     int totalNodes = 0 ; // doesn't include the ground node
@@ -141,58 +149,12 @@ int main(int argc, char** argv){
     
     // now we will use the Eigen library functions to construct the required matrices in the modified nodal analysis method 
     
-    double omega = 2*pi*vSource[0].freq*KILO;
-    
     /* for interconnections between passive circuit elements */
     MatrixXcd G(totalNodes, totalNodes); // x-arbitrary_size, c-complex, d-double
-    G = MatrixXd::Constant(totalNodes, totalNodes, 0); // assign all values to 0 
-    
     /*
     1. each element in the diagonal matrix is equal to the sum of admittance of each element connected to the corresponding node 
     2. the off-diagonal elements are sum of negative admittance of elements connected to the pair of corresponding nodes 
     */
-    
-    for(int i = 0 ; i < circuitElements.size(); i ++){
-        int ns = circuitElements[i].netStart;
-        int ne = circuitElements[i].netEnd;
-        
-        double val = circuitElements[i].valWithUnit;
-        double re, im; 
-        // compute the admittance
-        switch(circuitElements[i].elementName[0]){
-            case 'R':
-                    re = 1/(val);
-                    im = 0;
-                    break;
-            case 'L':
-                    re = 0;
-                    im = -1/(omega*val);
-                    break;
-            case 'C':
-                    re = 0;
-                    im = omega*val;
-                    break;
-            default:
-                    break;
-        }
-        complex <double> Y(re, im); // admittance = 1/impedance
-        circuitElements[i].admittance = Y; // to be used in current computation 
-        if(ns != 0 && ne != 0){
-            // diagonal elements corresponding to ns-1 and ne-1 
-            G(ns - 1, ns - 1) += Y;
-            G(ne - 1, ne - 1) += Y; 
-            // off-diagonals for pair of connected nodes 
-            G(ns - 1, ne - 1) -= Y;
-            G(ne - 1, ns - 1) -= Y;
-        }
-        else if(ns == 0){
-            G(ne - 1, ne - 1) += Y;
-        }
-        else if(ne == 0){
-            G(ns - 1, ns - 1) += Y;
-        }
-        // element cannot have both terminals as ground 
-    }
     
     /* 
     B & C for connections of voltage sources
@@ -201,22 +163,18 @@ int main(int argc, char** argv){
     => C = B transpose ( no dependent sources involved )
     */
     MatrixXcd B(totalNodes, totalVoltageSources);
-    B = MatrixXd::Constant(totalNodes, totalVoltageSources, 0); // assign all values to 0 
     MatrixXcd C(totalVoltageSources, totalNodes);
-    C = MatrixXd::Constant(totalVoltageSources, totalNodes, 0); // assign all values to 0 
     MatrixXcd E(totalVoltageSources, 1);
-    E = MatrixXd::Constant(totalVoltageSources, 1, 0); // assign all values to 0 
     /*
     1. if +ve terminal (netStart) of ith voltage source is connected to node k then C(i, k) = 1
     2. if -ve terminal (netEnd) of ith voltage source is connected to node k then C(i, k) = -1 
     3. E(i, 0) = value of voltage of ith voltage source 
     */
-    
+    B = MatrixXd::Constant(totalNodes, totalVoltageSources, 0); // assign all values to 0
+    C = MatrixXd::Constant(totalVoltageSources, totalNodes, 0); // assign all values to 0 
+    E = MatrixXd::Constant(totalVoltageSources, 1, 0); // assign all values to 0 
     for(int i = 0 ; i < vSource.size(); i ++){
         double mag = vSource[i].amplitude;
-        // double re = mag*cos(omega), im = mag*sin(omega);
-        // E(i, 0) = complex <double> (re, im);
-        E(i, 0) = mag;
         int ns = vSource[i].netStart;
         int ne = vSource[i].netEnd;
         complex <double> One(1, 0);
@@ -235,36 +193,6 @@ int main(int argc, char** argv){
             B(ns - 1, i) += One;
         }
     }
-    
-    /*
-    for knowing whether the program works fine till now, we need to print the matrices formed till now 
-    
-    cout << "G : \n";
-    for(int i = 0 ; i < totalNodes; i ++){
-        for(int j = 0 ; j < totalNodes; j ++){
-            cout << G(i,j) << " ";
-        }
-        cout << "\n";
-    }
-    
-    cout << "\nC : \n";
-    for(int i = 0 ; i < totalVoltageSources; i ++){
-        for(int j = 0 ; j < totalNodes; j ++){
-            cout << C(i, j) << " ";
-        }
-        cout << "\n";
-    }
-    
-    cout << "\nE : \n";
-    for(int i = 0 ; i < totalVoltageSources ; i ++){
-        for(int j = 0 ; j < 1; j ++){
-            cout << E(i, j) << " ";
-        }
-        cout << "\n";
-    }
-    
-    */
-    
     /*
     Matrix D just contains all zeroes (all sources independent)
     */
@@ -276,11 +204,7 @@ int main(int argc, char** argv){
                 |C  D|
     */
     MatrixXcd A(totalNodes + totalVoltageSources, totalNodes + totalVoltageSources);
-    for(int i = 0 ; i < totalNodes; i ++){
-        for(int j = 0 ; j < totalNodes ; j ++){
-            A(i, j) = G(i, j);
-        }
-    }
+    // assign B, C, D in the beginning only, no changes required later 
     for(int i = totalNodes; i < totalNodes + totalVoltageSources; i ++){
         for(int j = 0; j < totalNodes ; j ++){
             A(i, j) = C(i - totalNodes, j);
@@ -296,15 +220,6 @@ int main(int argc, char** argv){
             A(i, j) = D(i - totalNodes, j - totalNodes);
         }
     }
-    
-    // cout << "\nA : \n";
-    // for(int i = 0 ; i < totalVoltageSources + totalNodes; i ++){
-    //     for(int j = 0 ; j < totalNodes + totalVoltageSources; j ++){
-    //         cout << A(i, j) << " ";
-    //     }
-    //     cout << "\n";
-    // }
-    
     /*
     Matrix Z (which contains the known values of current sources and voltages)
     Z = [I  E] transpose 
@@ -314,38 +229,7 @@ int main(int argc, char** argv){
     
     MatrixXcd Z(totalNodes + totalVoltageSources, 1);
     MatrixXcd I(totalNodes, 1);
-    I = MatrixXd::Constant(totalNodes, 1, 0);
     
-    for(int i = 0 ; i < iSource.size(); i ++){
-        int ns = iSource[i].netStart;
-        int ne = iSource[i].netEnd;
-        // if current flows from netEnd to netStart 
-        if(ns != 0 && ne != 0){
-            I(ns - 1, 0) += iSource[i].amplitude;
-            I(ne - 1, 0) -= iSource[i].amplitude;
-        }
-        else if(ns == 0){
-            I(ne - 1, 0) -= iSource[i].amplitude;
-        }
-        else if(ne == 0){
-            I(ns - 1, 0) += iSource[i].amplitude;
-        }
-    }
-    
-    for(int i = 0 ; i < totalNodes ; i ++){
-        Z(i, 0) = I(i, 0);
-    }
-    for(int i = totalNodes; i < totalNodes + totalVoltageSources ; i ++){
-        Z(i, 0) = E(i - totalNodes, 0);
-    }
-    
-    // cout << "\nZ : \n";
-    // for(int i = 0 ; i < totalVoltageSources + totalNodes; i ++){
-    //     for(int j = 0 ; j < 1; j ++){
-    //         cout << Z(i, j) << " ";
-    //     }
-    //     cout << "\n";
-    // }
     /*
         Matrix X will be obtained by solving 
             AX = Z
@@ -355,78 +239,182 @@ int main(int argc, char** argv){
     */
     
     MatrixXcd X(totalNodes + totalVoltageSources, 1);
-    X = A.colPivHouseholderQr().solve(Z); // used to solve AX = Z    
+
+    // solving for multiple frequencies 
+    // assuming that all of them have different frequencies 
     
-    // changing the direction of current assumed wrongly for convenience across the voltage sources 
-    for(int i = totalNodes ; i < totalNodes + totalVoltageSources ; i ++){
-        double re = -X(i, 0).real(), im = -X(i, 0).imag();
-        complex <double> temp(re, im);
-        X(i, 0) = temp;
-    }
+    int currentVoltSource = 0; // for matrix E 
+    for(int T = 0 ; T < sourceElements.size(); T ++){
+        // currently the Tth Element is considered to be active 
+        double omega = 2*pi*(sourceElements[T].freq)*KILO;
+        
+        // only the matrices G (thus A) & I and E (thus Z) change at each iteration  
+        
+        G = MatrixXd::Constant(totalNodes, totalNodes, 0); // assign all values to 0
+        for(int i = 0 ; i < circuitElements.size(); i ++){
+            int ns = circuitElements[i].netStart;
+            int ne = circuitElements[i].netEnd;
+            
+            double val = circuitElements[i].valWithUnit;
+            double re, im; 
+            // compute the admittance
+            switch(circuitElements[i].elementName[0]){
+                case 'R':
+                        re = 1/(val);
+                        im = 0;
+                        break;
+                case 'L':
+                        re = 0;
+                        im = -1/(omega*val);
+                        break;
+                case 'C':
+                        re = 0;
+                        im = omega*val;
+                        break;
+                default:
+                        break;
+            }
+            complex <double> Y(re, im); // admittance = 1/impedance
+            circuitElements[i].admittance = Y; // to be used in current computation 
+            if(ns != 0 && ne != 0){
+                // diagonal elements corresponding to ns-1 and ne-1 
+                G(ns - 1, ns - 1) += Y;
+                G(ne - 1, ne - 1) += Y; 
+                // off-diagonals for pair of connected nodes 
+                G(ns - 1, ne - 1) -= Y;
+                G(ne - 1, ns - 1) -= Y;
+            }
+            else if(ns == 0){
+                G(ne - 1, ne - 1) += Y;
+            }
+            else if(ne == 0){
+                G(ns - 1, ns - 1) += Y;
+            }
+            // element cannot have both terminals as ground 
+        }
+        
+        Z = MatrixXd::Constant(totalVoltageSources + totalNodes, 1, 0);
+        E = MatrixXd::Constant(totalVoltageSources, 1, 0); // assign all values to 0 
+        // only the current voltage source is active 
+        if(sourceElements[T].sourceName[0] == 'V'){
+            E(currentVoltSource, 0) = sourceElements[T].amplitude;
+            Z(currentVoltSource + totalNodes, 0) = sourceElements[T].amplitude;
+            currentVoltSource ++; 
+        }
+        
+        for(int i = 0 ; i < totalNodes; i ++){
+            for(int j = 0 ; j < totalNodes ; j ++){
+                A(i, j) = G(i, j);
+            }
+        }
     
-    // store the node voltages in the appropriate vector 
-    for(int i = 0 ; i < totalNodes ; i ++){
-        VoltageNode[i+1] = X(i, 0);
-    }
-    
-    // cout << "\nX : \n";
-    // for(int i = 0 ; i < totalVoltageSources + totalNodes; i ++){
-    //     for(int j = 0 ; j < 1; j ++){
-    //         cout << abs(X(i, j)) << " ";
-    //     }
-    //     cout << "\n";
-    // }
-    
-    // print voltages on the screen 
-    cout << "\n";
-    cout << "VOLTAGES OF ELEMENTS\n";
-    for(int i = 0; i < circuitElements.size(); i ++){
-        int ns = circuitElements[i].netStart;
-        int ne = circuitElements[i].netEnd;
-        cout << circuitElements[i].elementName[0] << circuitElements[i].elementNum << " ";
-        complex <double> voltDiff = VoltageNode[ns] - VoltageNode[ne];
-        circuitElements[i].voltage = voltDiff; // to be used in current computation 
-        cout << round_3(abs(voltDiff)) << " " << round_3(phase(voltDiff)) << "\n";
-    }
-    cout << "\nVOLTAGES OF SOURCES\n";
-    for(int i = 0 ; i < sourceElements.size(); i ++){
-        int ns = sourceElements[i].netStart;
-        int ne = sourceElements[i].netEnd;
-        cout << sourceElements[i].sourceName[0] << sourceElements[i].sourceNum << " ";
+        // cout << "\nA : \n";
+        // for(int i = 0 ; i < totalVoltageSources + totalNodes; i ++){
+        //     for(int j = 0 ; j < totalNodes + totalVoltageSources; j ++){
+        //         cout << A(i, j) << " ";
+        //     }
+        //     cout << "\n";
+        // }
+        
+        I = MatrixXd::Constant(totalNodes, 1, 0);
+        // only if the current CURRENT SOURCE is active, it will reflect in I
+        // otherwise net CURRENT at all nodes will be zero 
+        if(sourceElements[T].sourceName[0] == 'I'){
+            int ns = sourceElements[T].netStart;
+            int ne = sourceElements[T].netEnd;
+            // if current flows from netEnd to netStart 
+            // this also means that netStart is at higher potential
+            // so same notation used as given in assignmentPDF
+            if(ns != 0 && ne != 0){
+                I(ns - 1, 0) = sourceElements[T].amplitude;
+                Z(ns - 1, 0) = sourceElements[T].amplitude;
+                I(ne - 1, 0) = sourceElements[T].amplitude;
+                Z(ne - 1, 0) = sourceElements[T].amplitude;
+            }
+            else if(ns == 0){
+                I(ne - 1, 0) = sourceElements[T].amplitude;
+                Z(ne - 1, 0) = sourceElements[T].amplitude;
+            }
+            else if(ne == 0){
+                I(ns - 1, 0) = sourceElements[T].amplitude;
+                Z(ns - 1, 0) = sourceElements[T].amplitude;
+            }
+        }
+        
+        // cout << "\nZ : \n";
+        // for(int i = 0 ; i < totalVoltageSources + totalNodes; i ++){
+        //     for(int j = 0 ; j < 1; j ++){
+        //         cout << Z(i, j) << " ";
+        //     }
+        //     cout << "\n";
+        // }
+        
+        X = A.colPivHouseholderQr().solve(Z); // used to solve AX = Z    
+        // changing the direction of current assumed wrongly for convenience across the voltage sources 
+        for(int i = totalNodes ; i < totalNodes + totalVoltageSources ; i ++){
+            double re = -X(i, 0).real(), im = -X(i, 0).imag();
+            complex <double> temp(re, im);
+            X(i, 0) = temp;
+        }
+        
+        // store the node voltages in the appropriate vector 
+        for(int i = 0 ; i < totalNodes ; i ++){
+            VoltageNode[i+1] = X(i, 0);
+        }
+        
+        // cout << "\nX : \n";
+        // for(int i = 0 ; i < totalVoltageSources + totalNodes; i ++){
+        //     for(int j = 0 ; j < 1; j ++){
+        //         cout << abs(X(i, j)) << " ";
+        //     }
+        //     cout << "\n";
+        // }
+        
+        // print voltages on the screen 
+        cout << "\n";
+        cout << "VOLTAGES OF ELEMENTS\n";
+        for(int i = 0; i < circuitElements.size(); i ++){
+            int ns = circuitElements[i].netStart;
+            int ne = circuitElements[i].netEnd;
+            cout << circuitElements[i].elementName[0] << circuitElements[i].elementNum << " ";
+            complex <double> voltDiff = VoltageNode[ns] - VoltageNode[ne];
+            circuitElements[i].voltage = voltDiff; // to be used in current computation 
+            cout << round_3(abs(voltDiff)) << " " << round_3(phase(voltDiff)) << "\n";
+        }
+        cout << "\nVOLTAGE OF ACTIVE SOURCE\n";
+        int ns = sourceElements[T].netStart;
+        int ne = sourceElements[T].netEnd;
+        cout << sourceElements[T].sourceName[0] << sourceElements[T].sourceNum << " ";
         complex <double> voltDiff;
-        if(sourceElements[i].sourceName[0] == 'V')
-            voltDiff = sourceElements[i].amplitude;
+        if(sourceElements[T].sourceName[0] == 'V')
+            voltDiff = sourceElements[T].amplitude;
         else
             voltDiff = VoltageNode[ns] - VoltageNode[ne];
-        sourceElements[i].voltage = voltDiff;
+        sourceElements[T].voltage = voltDiff;
         cout << round_3(abs(voltDiff)) << " " << round_3(phase(voltDiff)) << "\n";        
-    }
-    
-    // current values are to be computed, impedance will also be required 
-    cout << "\nCURRENTS OF ELEMENTS\n";
-    for(int i = 0 ; i < circuitElements.size(); i ++){
-        complex<double> res = circuitElements[i].voltage * circuitElements[i].admittance;
-        circuitElements[i].current = res;
-        cout << circuitElements[i].elementName[0] << circuitElements[i].elementNum << " ";
-        cout << round_3(abs(res)) << " " << round_3(phase(res)) << "\n";
-    }
-    cout << "\nCURRENTS OF SOURCES\n";
-    int currentVoltSource = 0; // for voltage sources, result to be extracted from the matrix X (starting from the totalNodes index)
-    for(int i = 0 ; i < sourceElements.size(); i ++){
-        cout << sourceElements[i].sourceName[0] << sourceElements[i].sourceNum << " ";
+        
+        // current values are to be computed, impedance will also be required 
+        cout << "\nCURRENTS OF ELEMENTS\n";
+        for(int i = 0 ; i < circuitElements.size(); i ++){
+            complex<double> res = circuitElements[i].voltage * circuitElements[i].admittance;
+            circuitElements[i].current = res;
+            cout << circuitElements[i].elementName[0] << circuitElements[i].elementNum << " ";
+            cout << round_3(abs(res)) << " " << round_3(phase(res)) << "\n";
+        }
+        cout << "\nCURRENT OF ACTIVE SOURCE\n";
+        cout << sourceElements[T].sourceName[0] << sourceElements[T].sourceNum << " ";
         complex <double> res;
-        switch(sourceElements[i].sourceName[0]){
+        switch(sourceElements[T].sourceName[0]){
             case 'V':
-                    res = X(totalNodes + currentVoltSource);
-                    currentVoltSource ++;
+                    res = X(totalNodes + currentVoltSource - 1);
                     break;
             case 'I':
-                    res = sourceElements[i].amplitude;
+                    res = sourceElements[T].amplitude;
                     break;
             default:
                     break;
         }
-        sourceElements[i].current = res;
+        sourceElements[T].current = res;
         cout << round_3(abs(res)) << " " << round_3(phase(res)) << "\n";        
     }
     return 0;

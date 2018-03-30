@@ -4,12 +4,14 @@
 */
 #include <vector>
 #include <complex>
+#include <algorithm>
 using namespace std;
 
 // structure for element to be used in scanning and parsing
 struct element{
     char* elementName;
-    int elementNum, netStart, netEnd, value;
+    int elementNum, netStart, netEnd;
+    double value; // could be in decimals 
     char* unit;
     
     complex <double> current, voltage, admittance; // the part required for solving the circuit 
