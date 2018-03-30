@@ -5,6 +5,7 @@
 #include <vector>
 #include <complex>
 #include <algorithm>
+#include <string>
 using namespace std;
 
 // structure for element to be used in scanning and parsing

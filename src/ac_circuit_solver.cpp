@@ -7,7 +7,7 @@
 #include <iostream>
 #include "Eigen/Eigen"
 #include "parse.h"
-
+#include "draw.h"
 #define KILO 1000.0
 #define NANO 0.000000001
 #define MILLI 0.001
@@ -146,6 +146,9 @@ int main(int argc, char** argv){
     for(int i = 0 ; i <= totalNodes; i ++){
         VoltageNode.push_back(temp);
     }
+    
+    // call the main draw function to render netlist as svg 
+    drawMain(totalNodes, circuitElements, iSource, vSource);
     
     // now we will use the Eigen library functions to construct the required matrices in the modified nodal analysis method 
     

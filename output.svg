@@ -1,0 +1,41 @@
+<svg height="1000" width= "1000" xmlns="http://www.w3.org/2000/svg"><line x1="250" y1="0" x2="250" y2="900" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="250" cy="0" r="1" />
+<circle id="pointA" cx="250" cy="900" r="1" /><line x1="500" y1="0" x2="500" y2="1000" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="500" cy="0" r="1" />
+<circle id="pointA" cx="500" cy="1000" r="1" /><circle id="pointA" cx="250" cy="250" r="1" />
+<circle id="pointA" cx="362.500000" cy="250" r="1" />
+<line x1="250" y1="250" x2="362.500000" y2="250" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="367.500000" cy="245" r="1" />
+<line x1="362.500000" y1="250" x2="367.500000" y2="245" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="372.500000" cy="255" r="1" />
+<line x1="367.500000" y1="245" x2="372.500000" y2="255" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="377.500000" cy="245" r="1" />
+<line x1="372.500000" y1="255" x2="377.500000" y2="245" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="382.500000" cy="255" r="1" />
+<line x1="377.500000" y1="245" x2="382.500000" y2="255" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="387.500000" cy="250" r="1" />
+<line x1="382.500000" y1="255" x2="387.500000" y2="250" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="387.500000" y1="250" x2="500" y2="250" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="500" cy="250" r= " 1" /><line x1="250" y1="500" x2="373.000000" y2="500" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="373.000000" y1="496" x2="373.000000" y2="504" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="377.000000" y1="496" x2="377.000000" y2="504" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="377.000000" y1="500" x2="500" y2="500" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="250" cy="500" r="1" />
+<circle id="pointA" cx="500" cy="500" r="1" /><line x1="250" y1="750" x2="365.000000" y2="750" style=" stroke:rgb(0,0,0);stroke-width: 2" />
+<circle id="pointA" cx="365.000000" cy="750" r="1" />
+<path d="M 365.000000 750  q 2.5 5 5 0 " stroke="black" stroke-width="2" fill="none" />
+<circle id="pointA" cx="370.000000" cy="750" r="1" />
+<path d="M 370.000000 750  q 2.5 5 5 0 " stroke="black" stroke-width="2" fill="none" />
+<circle id="pointA" cx="375.000000" cy="750" r="1" />
+<path d="M 375.000000 750  q 2.5 5 5 0 " stroke="black" stroke-width="2" fill="none" />
+<circle id="pointA" cx="380.000000" cy="750" r="1" />
+<path d="M 380.000000 750  q 2.5 5 5 0 " stroke="black" stroke-width="2" fill="none" />
+<circle id="pointA" cx="385.000000" cy="750" r="1" />
+<line x1="385.000000" y1="750" x2="500" y2="750" style="stroke:rgb(0,0,0);stroke-width:2" /> <circle cx="375.000000" cy="850" r="10" stroke="black" stroke-width="2" fill="white" />
+<line x1="250" y1="850" x2="365.000000" y2="850" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="385.000000" y1="850" x2="500" y2="850" style="stroke:rgb(0,0,0);stroke-width:2" />
+<path d="M 375.000000 850 q 2.5 -5 5 0" stroke="black" stroke-width="2" fill="none" />
+<path d="M 370.000000 850 q 2.5 5 5 0" stroke="black" stroke-width="2" fill="none" /><line x1="0"  y1="999" x2="999" y2="999" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="0" cy="999" r="1" />
+<circle id="pointA" cx="999" cy="999" r="1" />
+</svg>

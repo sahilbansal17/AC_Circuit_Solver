@@ -1,11 +1,10 @@
 /*
-    This file will contain the DECLARATIONS for the svg functions
-    defined for drawing various components (resistors, capacitors,
+    This file will contain the DEFINITIONS for the svg functions
+    for drawing various components (resistors, capacitors,
     inductors, voltage source and current source, etc.)
 */
 
 #include <fstream>
-#include <string>
 
 using namespace std;
 
@@ -21,8 +20,7 @@ void drawHorizontalLine(int X1, int Y1, int X2) {
 
           "\n<circle id=\"pointA\" cx=\"" + to_string(X2) + "\" cy=\"" + to_string(Y1) + "\" r=\"" +
           to_string(1) + "\" />";
-
-    // <text x=X1+50 y=Y1+20 dx="-30">count</text>
+          
     fout << res;
 }
 
@@ -37,11 +35,10 @@ void drawVerticalLine(int X1, int Y1, int Y2) {
           "\n<circle id=\"pointA\" cx=\"" + to_string(X1) + "\" cy=\"" + to_string(Y2) + "\" r=\"" +
           to_string(1) + "\" />";
 
-    // <text x=X1+50 y=Y1+20 dx="-30">count</text>
     fout << res;
 }
 
-void drawResistor(int X1, int Y1, int X2) {           //minimum 30 t0 50
+void drawResistor(int X1, int Y1, int X2) {           //minimum 30 to 50
     float pt = X2 - X1;
     pt = pt - 25;
     pt = pt / 2;
@@ -87,13 +84,6 @@ void drawResistor(int X1, int Y1, int X2) {           //minimum 30 t0 50
           to_string(X2) + "\" y2=\"" + to_string(Y1) +
           "\" style=\"stroke:rgb(0,0,0);stroke-width:2\" />" +
 
-          // "\n<line x1=\"" + to_string(X1 + 150) + "\" y1=\"" + to_string(Y1 + 20) + "\" x2=\"" +
-          // to_string(X1 + 160) + "\" y2=\"" + to_string(Y1 ) +
-          // "\" style=\"stroke:rgb(0,0,0);stroke-width:2\" />" +
-
-          // "\n<line x1=\"" + to_string(X1 + 160) + "\" y1=\"" + to_string(Y1) + "\" x2=\"" + to_string(X1 + 195) +
-          // "\" y2=\"" + to_string(Y1) + "\" style=\"stroke:rgb(0,0,0);stroke-width:2\" />" +
-
           "\n<circle id=\"pointA\" cx=\"" + to_string(X2) + "\" cy=\"" + to_string(Y1) +
           "\" r= \" " + to_string(1) + "\" />";
     fout << res;
@@ -123,10 +113,7 @@ void drawCapacitor(int X1, int Y1, int X2) {       // minimum 10
           "\n<circle id=\"pointA\" cx=\"" + to_string(X2) + "\" cy=\"" + to_string(Y1) + "\" r=\"" +
           to_string(1) + "\" />";
 
-    // "\n<text x=\"" + to_string(X1 + 60) + " \" y=\"" + to_string(Y1 + 50) + "\" dx=\"" + to_string(-30) +
-    // "\">Capacitor</text>";
     fout << res;
-
 }
 
 void drawVoltage(int X1, int Y1, int X2) {
@@ -149,7 +136,6 @@ void drawVoltage(int X1, int Y1, int X2) {
           "\n<path d=\"M " + to_string(X1 + pt + 5) + " " + to_string(Y1) +
           " q 2.5 5 5 0\" stroke=\"black\" stroke-width=\"" + to_string(2) + "\" fill=\"none\" />";
     fout << res;
-
 }
 
 void drawCurrent(int X1, int Y1, int X2) {
@@ -179,9 +165,7 @@ void drawCurrent(int X1, int Y1, int X2) {
 
 
     fout << res;
-
 }
-
 
 void drawInductor(int X1, int Y1, int X2) {       // minimum 30
     float pt = X2 - X1;
@@ -216,9 +200,7 @@ void drawInductor(int X1, int Y1, int X2) {       // minimum 30
           "\n<line x1=\"" + to_string(X1 + pt + 20) + "\" y1=\"" + to_string(Y1) + "\" x2=\"" + to_string(X2) +
           "\" y2=\"" + to_string(Y1) + "\" style=\"stroke:rgb(0,0,0);stroke-width:" + to_string(2) + "\" /> ";
     fout << res;
-
 }
-
 
 void start(int h, int w) {
     fout.open("output.svg");
@@ -231,15 +213,3 @@ void end() {
     fout.close();
 }
 
-int main() {
-    start(1000, 1000);
-    drawVerticalLine(5, 10, 25);
-    drawResistor(25, 25, 75);
-    drawCapacitor(50, 50, 100);
-    drawInductor(100, 100, 150);
-    drawVoltage(150, 150, 200);
-    drawCurrent(200, 200, 250);
-    end();
-    fout.close();
-    return 0;
-}
