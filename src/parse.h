@@ -12,7 +12,7 @@ struct element{
     int elementNum, netStart, netEnd, value;
     char* unit;
     
-    complex <double> current, voltage; // the part required for solving the circuit 
+    complex <double> current, voltage, admittance; // the part required for solving the circuit 
     double valWithUnit;  
 };
 

@@ -18,3 +18,5 @@ runAll:
 	./first Public_cases/Testcase4/top.cir
 	echo "Case5:\n"
 	./first Public_cases/Testcase5/top.cir
+run:
+	./first Public_cases/solveTest1.cir
