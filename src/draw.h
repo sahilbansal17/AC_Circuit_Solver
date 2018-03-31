@@ -10,3 +10,10 @@ el  : elements (R, L, C)
 cs  : current sources 
 vs  : voltage sources 
 */
+
+// combining elements and sources into components for ease of drawing 
+struct component;
+
+// comparison functions to sort the components based on netEnd  
+bool orderByNetEnd(const component &a, const component &b);
+
