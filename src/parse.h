@@ -5,7 +5,7 @@
 #include <vector>
 #include <complex>
 #include <algorithm>
-#include <string>
+#include <string.h> // strdup doesn't work otherwise 
 using namespace std;
 
 // structure for element to be used in scanning and parsing

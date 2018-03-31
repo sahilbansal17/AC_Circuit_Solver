@@ -5,12 +5,11 @@ DIR = src
 execute:  
 	yacc -d src/parseCircuit.y
 	lex src/scanCircuit.l
-	$(CXX) lex.yy.c y.tab.c $(DIR)/ac_circuit_solver.cpp $(DIR)/svg.cpp $(DIR)/draw.cpp -o first $(CFLAGS)
+	$(CXX) lex.yy.c y.tab.c $(DIR)/ac_circuit_solver.cpp $(DIR)/svg.cpp $(DIR)/draw.cpp -o ac_circuit_solver $(CFLAGS)
 	
 # make clean
 clean:
-	rm first  
+	rm ac_circuit_solver  
 	
-# make run input=Public_cases/solveCases/solveTest1.cir	
-run:
-	./first $(input)
+# to run :
+# ./ac_circuit_solver Public_cases/solveCases/solveTest1.cir ../test1.svg ../test1.txt

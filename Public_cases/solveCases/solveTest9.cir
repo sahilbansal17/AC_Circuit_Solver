@@ -1,0 +1,18 @@
+V1 Net1 0 SINE ( 0 40 0.159Khz 0.0S )
+R1 Net1 Net2 2
+R2 Net2 Net3 9
+R3 Net3 Net4 8
+R3 Net3 Net4 8
+R3 Net3 Net4 8
+R3 Net3 Net4 8
+I1 Net4 0 SINE ( 0 1 0.159Khz 0.0S )
+R4 Net2 0 10
+R4 Net2 0 10
+R4 Net2 0 10
+I1 Net3 Net1 SINE ( 0 1 0.9Khz 0.0S )
+V1 Net1 Net4 SINE ( 0 1 0.001Khz 0.0S )
+R4 Net2 0 10
+R4 Net1 Net3 10
+R4 Net1 Net3 10
+R5 Net3 0 4
+R6 Net2 Net4 6

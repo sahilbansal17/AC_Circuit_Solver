@@ -5,6 +5,7 @@
     included in this file only.
 */
 #include <iostream>
+#include <fstream>
 #include "Eigen/Eigen"
 #include "parse.h"
 #include "draw.h"
@@ -70,7 +71,8 @@ int main(int argc, char** argv){
         cout << "\nErrors in input netlist...aborting!\n";
         return 0;
     }
-    
+    string fileNameSVG(argv[2]); // OUTPUT SVG FILE 
+    string fileNameRES(argv[3]); // OUTPUT RESULTS FILE 
     /* INITIALIZATION */
     vector <source> vSource, iSource; // seperate the two types of sources
     
@@ -148,8 +150,7 @@ int main(int argc, char** argv){
     }
     
     // call the main draw function to render netlist as svg 
-    string fileName(argv[1]);
-    drawMain(fileName, totalNodes + 1, circuitElements, iSource, vSource);
+    drawMain(fileNameSVG, totalNodes + 1, circuitElements, iSource, vSource);
     // since 0 is not included in totalNodes
     
     // now we will use the Eigen library functions to construct the required matrices in the modified nodal analysis method 
@@ -249,9 +250,18 @@ int main(int argc, char** argv){
     // assuming that all of them have different frequencies 
     
     int currentVoltSource = 0; // for matrix E 
+    
+    ofstream fout;
+    fout.open(fileNameRES);
     for(int T = 0 ; T < sourceElements.size(); T ++){
         // currently the Tth Element is considered to be active 
         double omega = 2*pi*(sourceElements[T].freq)*KILO;
+        
+        int sameFreqCount = 1, index = T+1;
+        while(index < sourceElements.size() && sourceElements[index].freq == sourceElements[T].freq){
+            sameFreqCount ++ ;
+            index ++ ;
+        }
         
         // only the matrices G (thus A) & I and E (thus Z) change at each iteration  
         
@@ -298,15 +308,6 @@ int main(int argc, char** argv){
             // element cannot have both terminals as ground 
         }
         
-        Z = MatrixXd::Constant(totalVoltageSources + totalNodes, 1, 0);
-        E = MatrixXd::Constant(totalVoltageSources, 1, 0); // assign all values to 0 
-        // only the current voltage source is active 
-        if(sourceElements[T].sourceName[0] == 'V'){
-            E(currentVoltSource, 0) = sourceElements[T].amplitude;
-            Z(currentVoltSource + totalNodes, 0) = sourceElements[T].amplitude;
-            currentVoltSource ++; 
-        }
-        
         for(int i = 0 ; i < totalNodes; i ++){
             for(int j = 0 ; j < totalNodes ; j ++){
                 A(i, j) = G(i, j);
@@ -321,30 +322,41 @@ int main(int argc, char** argv){
         //     cout << "\n";
         // }
         
+        Z = MatrixXd::Constant(totalVoltageSources + totalNodes, 1, 0);
+        E = MatrixXd::Constant(totalVoltageSources, 1, 0); // assign all values to 0 
         I = MatrixXd::Constant(totalNodes, 1, 0);
-        // only if the current CURRENT SOURCE is active, it will reflect in I
-        // otherwise net CURRENT at all nodes will be zero 
-        if(sourceElements[T].sourceName[0] == 'I'){
-            int ns = sourceElements[T].netStart;
-            int ne = sourceElements[T].netEnd;
-            // if current flows from netEnd to netStart 
-            // this also means that netStart is at higher potential
-            // so same notation used as given in assignmentPDF
-            if(ns != 0 && ne != 0){
-                I(ns - 1, 0) = sourceElements[T].amplitude;
-                Z(ns - 1, 0) = sourceElements[T].amplitude;
-                I(ne - 1, 0) = sourceElements[T].amplitude;
-                Z(ne - 1, 0) = sourceElements[T].amplitude;
+        // only the sources with same frequency are active 
+        for(int freqCt = 1; freqCt <= sameFreqCount ; freqCt ++){
+            // active VOLTAGE source
+            int T1 = T + freqCt - 1;
+            double amp = sourceElements[T1].amplitude;
+            if(sourceElements[T1].sourceName[0] == 'V'){
+                E(currentVoltSource, 0) = amp ;
+                Z(currentVoltSource + totalNodes, 0) = amp;
+                currentVoltSource ++; 
             }
-            else if(ns == 0){
-                I(ne - 1, 0) = sourceElements[T].amplitude;
-                Z(ne - 1, 0) = sourceElements[T].amplitude;
+            else if(sourceElements[T1].sourceName[0] == 'I'){    // active CURRENT source 
+                int ns = sourceElements[T1].netStart;
+                int ne = sourceElements[T1].netEnd;
+                // if current flows from netEnd to netStart 
+                // this also means that netStart is at higher potential
+                // so same notation used as given in assignmentPDF
+                if(ns != 0 && ne != 0){
+                    I(ns - 1, 0) = amp;
+                    Z(ns - 1, 0) = amp;
+                    I(ne - 1, 0) = amp;
+                    Z(ne - 1, 0) = amp;
+                }
+                else if(ns == 0){
+                    I(ne - 1, 0) = amp;
+                    Z(ne - 1, 0) = amp;
+                }
+                else if(ne == 0){
+                    I(ns - 1, 0) = amp;
+                    Z(ns - 1, 0) = amp;
+                }
             }
-            else if(ne == 0){
-                I(ns - 1, 0) = sourceElements[T].amplitude;
-                Z(ns - 1, 0) = sourceElements[T].amplitude;
-            }
-        }
+        } 
         
         // cout << "\nZ : \n";
         // for(int i = 0 ; i < totalVoltageSources + totalNodes; i ++){
@@ -375,52 +387,67 @@ int main(int argc, char** argv){
         //     cout << "\n";
         // }
         
-        // print voltages on the screen 
-        cout << "\n";
-        cout << "VOLTAGES OF ELEMENTS\n";
+        // output in the file 
+        fout << "==============================================================\n";
+        fout << "FREQ = " << sourceElements[T].freq << "KHz\n\n";
+        fout << "VOLTAGES OF ELEMENTS\n";
         for(int i = 0; i < circuitElements.size(); i ++){
             int ns = circuitElements[i].netStart;
             int ne = circuitElements[i].netEnd;
-            cout << circuitElements[i].elementName[0] << circuitElements[i].elementNum << " ";
+            fout << circuitElements[i].elementName[0] << circuitElements[i].elementNum << " ";
             complex <double> voltDiff = VoltageNode[ns] - VoltageNode[ne];
             circuitElements[i].voltage = voltDiff; // to be used in current computation 
-            cout << round_3(abs(voltDiff)) << " " << round_3(phase(voltDiff)) << "\n";
+            fout << round_3(abs(voltDiff)) << " " << round_3(phase(voltDiff)) << "\n";
         }
-        cout << "\nVOLTAGE OF ACTIVE SOURCE\n";
-        int ns = sourceElements[T].netStart;
-        int ne = sourceElements[T].netEnd;
-        cout << sourceElements[T].sourceName[0] << sourceElements[T].sourceNum << " ";
-        complex <double> voltDiff;
-        if(sourceElements[T].sourceName[0] == 'V')
-            voltDiff = sourceElements[T].amplitude;
+        if(sameFreqCount == 1)
+            fout << "\nVOLTAGE OF ACTIVE SOURCE\n";
         else
-            voltDiff = VoltageNode[ns] - VoltageNode[ne];
-        sourceElements[T].voltage = voltDiff;
-        cout << round_3(abs(voltDiff)) << " " << round_3(phase(voltDiff)) << "\n";        
+            fout << "\nVOLTAGE OF ACTIVE SOURCES\n";
+        for(int freqCt = 1; freqCt <= sameFreqCount ; freqCt ++){
+            int T1 = T + freqCt - 1;
+            int ns = sourceElements[T1].netStart;
+            int ne = sourceElements[T1].netEnd;
+            fout << sourceElements[T1].sourceName[0] << sourceElements[T1].sourceNum << " ";
+            complex <double> voltDiff;
+            if(sourceElements[T1].sourceName[0] == 'V')
+                voltDiff = sourceElements[T1].amplitude;
+            else
+                voltDiff = VoltageNode[ns] - VoltageNode[ne];
+            sourceElements[T1].voltage = voltDiff;
+            fout << round_3(abs(voltDiff)) << " " << round_3(phase(voltDiff)) << "\n"; 
+        }       
         
         // current values are to be computed, impedance will also be required 
-        cout << "\nCURRENTS OF ELEMENTS\n";
+        fout << "\nCURRENT OF ELEMENTS\n";
         for(int i = 0 ; i < circuitElements.size(); i ++){
             complex<double> res = circuitElements[i].voltage * circuitElements[i].admittance;
             circuitElements[i].current = res;
-            cout << circuitElements[i].elementName[0] << circuitElements[i].elementNum << " ";
-            cout << round_3(abs(res)) << " " << round_3(phase(res)) << "\n";
+            fout << circuitElements[i].elementName[0] << circuitElements[i].elementNum << " ";
+            fout << round_3(abs(res)) << " " << round_3(phase(res)) << "\n";
         }
-        cout << "\nCURRENT OF ACTIVE SOURCE\n";
-        cout << sourceElements[T].sourceName[0] << sourceElements[T].sourceNum << " ";
-        complex <double> res;
-        switch(sourceElements[T].sourceName[0]){
-            case 'V':
-                    res = X(totalNodes + currentVoltSource - 1);
-                    break;
-            case 'I':
-                    res = sourceElements[T].amplitude;
-                    break;
-            default:
-                    break;
-        }
-        sourceElements[T].current = res;
-        cout << round_3(abs(res)) << " " << round_3(phase(res)) << "\n";        
+        if(sameFreqCount == 1)
+            fout << "\nCURRENT OF ACTIVE SOURCE\n";
+        else
+            fout << "\nCURRENT OF ACTIVE SOURCES\n";
+        for(int freqCt = 1; freqCt <= sameFreqCount ; freqCt ++){
+            int T1 = T + freqCt - 1;
+            fout << sourceElements[T1].sourceName[0] << sourceElements[T1].sourceNum << " ";
+            complex <double> res;
+            switch(sourceElements[T1].sourceName[0]){
+                case 'V':
+                        res = X(totalNodes + currentVoltSource - 1);
+                        break;
+                case 'I':
+                        res = sourceElements[T1].amplitude;
+                        break;
+                default:
+                        break;
+            }
+            sourceElements[T1].current = res;
+            fout << round_3(abs(res)) << " " << round_3(phase(res)) << "\n";    
+        }    
+        T += sameFreqCount - 1; // so that same sources are not considered again 
     }
+    fout.close();
     return 0;
 }
