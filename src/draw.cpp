@@ -21,7 +21,7 @@ struct component{
 
 // comparison function to sort the components based on netEnd  
 bool orderByNetEnd(const component &a, const component &b){
-    return a.netEnd < b.netEnd; // two components will not have the same netEnd since their diff between netEnds is same in the vector
+    return a.netEnd <= b.netEnd; // two components CAN have the same netEnd since THEN their diff between netEnds is same in the vector
 }
 
 void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs){
@@ -46,41 +46,51 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
     
     component c;
 
+    // netStart is ensured smaller than netEnd for all the components to make sure that drawing happens properly 
     for(int i = 0 ; i < E ; i ++){
-        c.netStart  =   el[i].netStart;
-        c.netEnd    =   el[i].netEnd;
         c.name      =   el[i].elementName;
         c.num       =   el[i].elementNum;
         c.value     =   el[i].valWithUnit;
         c.current   =   el[i].current;
         c.voltage   =   el[i].voltage;
         int ns = el[i].netStart, ne = el[i].netEnd;
-        int diff = abs(ns - ne);
+        if(ns > ne){
+            swap(ns, ne);
+        }
+        int diff = ne - ns;
+        c.netStart  =   ns;
+        c.netEnd    =   ne;
         ordByNetDiff[diff].push_back(c);
     }
     
     for(int i = 0 ; i < VS ; i ++){
-        c.netStart  =   vs[i].netStart;
-        c.netEnd    =   vs[i].netEnd;
         c.name      =   vs[i].sourceName;
         c.num       =   vs[i].sourceNum;
         c.value     =   vs[i].amplitude;
         c.current   =   vs[i].current;
         c.voltage   =   vs[i].voltage;
         int ns = vs[i].netStart, ne = vs[i].netEnd;
-        int diff = abs(ns - ne);
+        if(ns > ne){
+            swap(ns, ne);
+        }
+        int diff = ne - ns;
+        c.netStart  =   ns;
+        c.netEnd    =   ne;
         ordByNetDiff[diff].push_back(c);
     }
     for(int i = 0 ; i < CS ; i ++){
-        c.netStart  =   cs[i].netStart;
-        c.netEnd    =   cs[i].netEnd;
         c.name      =   cs[i].sourceName;
         c.num       =   cs[i].sourceNum;
         c.value     =   cs[i].amplitude;
         c.current   =   cs[i].current;
         c.voltage   =   cs[i].voltage;
         int ns = cs[i].netStart, ne = cs[i].netEnd; 
-        int diff = abs(ns - ne);
+        if(ns > ne){
+            swap(ns, ne);
+        }
+        int diff = ne - ns;
+        c.netStart  =   ns;
+        c.netEnd    =   ne;
         ordByNetDiff[diff].push_back(c);
     }
     
@@ -96,7 +106,14 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
                 draw all those components that can have the same yCor based on the greedy technique 
                 
                 update yNet by 20 (since no more components can be drawn on the same line without an overlap)
-        
+    
+    THE PREVIOUS IMPLEMENTATION ALGO IS NOT APPROPRIATE WHEN TWO ELEMENTS HAVING THE SAME NET START AND NET END 
+    
+    CHANGES:
+        If more than two components have same net end and net start, 
+        draw them in parallel in the same iteration but increment yNet by 20*(max no of such components between any two nets in this iteration)
+        to avoid conflicts (overlaps) in the next iteration 
+    
     */
     
     // sort all vectors ordByNetDiff[i] on the basis of the ending nets, so that disjoint segments can be drawn on the same yCor 
@@ -105,9 +122,7 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
     }
     
     for(int i = 1 ; i < N ; i ++){
-        // no of elements to draw 
-        // int drawEl = ordByNetDiffE[i].size();
-        // int drawS = ordByNetDiffS[i].size();
+        // no of components to draw 
         int drawComp = ordByNetDiff[i].size();
         int xCor1, xCor2, yCor, ns, ne;
         char name;
@@ -117,6 +132,9 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
         int countedC = 0, startC = 0;
         // startC for 1st component in each iteration 
         while(countedC != drawComp){
+            // int yIncrement = 20; // default 
+            int maxBWtwoNets = 1; // default 
+            // yNet += 20 * maxBWtwoNets; this will be used at the end of iteration now 
             int flagUpdatedStart = 0;
             // draw 1st component (startC) independently so that ns and ne can be updated accordingly
             c = ordByNetDiff[i][startC];
@@ -124,6 +142,7 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
             name = c.name[0];
             xCor1 = xNets[ns], xCor2 = xNets[ne];
             yCor = yNet;
+            // cout << "Drawing " << name << ": " << ns << " to " << ne << "\n";
             switch(name){
                 case 'R':
                         drawResistor(xCor1, yCor, xCor2);
@@ -132,27 +151,64 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
                         drawInductor(xCor1, yCor, xCor2);
                         break;
                 case 'C':
-                        drawCurrent(xCor1, yCor, xCor2);
+                        drawCapacitor(xCor1, yCor, xCor2);
                         break;
                 case 'V':
                         drawVoltage(xCor1, yCor, xCor2);
                         break;
                 case 'I':
-                        drawVoltage(xCor1, yCor, xCor2);
+                        drawCurrent(xCor1, yCor, xCor2);
                         break;
             }
             visitedC[startC] = 1;
             countedC ++;
+            int cmax = 1; // for one iteration, the current max between current ns and ne 
             for(int j = startC + 1 ; j < drawComp ; j++){
+                c = ordByNetDiff[i][j];
                 if(!visitedC[j]){
-                    c = ordByNetDiff[i][j];
-                    if(c.netStart >= ne){
-                        // if netStart more than ne of previous drawn element 
+                    if(c.netEnd == ne){
+                        // case when this component and previous one have same netStart and netEnd
+                        // all elements with same ns and ne 
+                        // to handle the bug in previous implementation raised on solveTest5.cir
+                        xCor1 = xNets[ns], xCor2 = xNets[ne];
+                        name = c.name[0];
+                        // ns, ne, xCor1, xCor2 all remain the same
+                        // we won't change yNet but while drawing, we use an incrementer for yNet
+                        
+                        // cout << "Drawing " << name << ": " << ns << " to " << ne << "\n";
+                        switch(name){
+                            case 'R':
+                                    drawResistor(xCor1, yCor + cmax*20, xCor2);
+                                    break;
+                            case 'L':
+                                    drawInductor(xCor1, yCor + cmax*20, xCor2);
+                                    break;
+                            case 'C':
+                                    drawCapacitor(xCor1, yCor + cmax*20, xCor2);
+                                    break;
+                            case 'V':
+                                    drawVoltage(xCor1, yCor + cmax*20, xCor2);
+                                    break;
+                            case 'I':
+                                    drawCurrent(xCor1, yCor + cmax*20, xCor2);
+                                    break;
+                        }
+                        visitedC[j] = 1;
+                        countedC ++;
+                        cmax ++;
+                        // updated the maxBWtwoNets if cmax is larger than it, so that yNet can be correctly updated for next iteration 
+                        if(cmax > maxBWtwoNets){
+                            maxBWtwoNets = cmax; 
+                        }                        
+                    }
+                    else if(c.netStart >= ne){
+                        cmax = 1;
+                        // if netStart more than ne of previous drawn element, it is disjoint from other components drawn  
                         ns = c.netStart;
                         ne = c.netEnd;
                         name = c.name[0];
                         xCor1 = xNets[ns], xCor2 = xNets[ne];
-                        yCor = yNet;
+                        // cout << "Drawing " << name << ": " << ns << " to " << ne << "\n";
                         switch(name){
                             case 'R':
                                     drawResistor(xCor1, yCor, xCor2);
@@ -161,47 +217,27 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
                                     drawInductor(xCor1, yCor, xCor2);
                                     break;
                             case 'C':
-                                    drawCurrent(xCor1, yCor, xCor2);
+                                    drawCapacitor(xCor1, yCor, xCor2);
                                     break;
                             case 'V':
                                     drawVoltage(xCor1, yCor, xCor2);
                                     break;
                             case 'I':
-                                    drawVoltage(xCor1, yCor, xCor2);
+                                    drawCurrent(xCor1, yCor, xCor2);
                                     break;
                         }
                         visitedC[j] = 1;
                         countedC ++;
                     }
+                    else if(flagUpdatedStart == 0){
+                        // else next time the iteration must start from this element since it coincides with other elements drawn in this iteration 
+                        startC = j;
+                        flagUpdatedStart = 1;
+                    }
                 }
-                else if(flagUpdatedStart == 0 && !visitedC[j]){
-                    startC = j;
-                    flagUpdatedStart = 1;
-                }
             }
-            yNet += 20; // update for next iteration of loop 
+            yNet += 20*maxBWtwoNets; // update for next iteration of loop 
         }
-        /*
-        OLD WORK FOR SOURCES 
-        for(int j = 0 ; j < drawS ; j++){
-            s = ordByNetDiffS[i][j];
-            ns = s.netStart; ne = s.netEnd;
-            name = s.sourceName[0];
-            xCor1 = xNets[ns], xCor2 = xNets[ne];
-            if(i != 1){
-                yNet += 20; // for each next element, yCor will be 20 more to avoid overlaps, not a good way to handle since disjoint horizontal lines also possible
-            }
-            yCor = yNet;
-            switch(name){
-                case 'V':
-                        drawVoltage(xCor1, yCor, xCor2);
-                        break;
-                case 'I':
-                        drawCurrent(xCor1, yCor, xCor2);
-                        break;
-            }
-        }
-        */
     }
     
     end();
