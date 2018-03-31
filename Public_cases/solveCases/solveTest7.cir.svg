@@ -1,0 +1,53 @@
+<svg height="1000" width= "1000" xmlns="http://www.w3.org/2000/svg"><circle cx="250.000000" cy="100" r="10" stroke="black" stroke-width="2" fill="white" />
+<line x1="125" y1="100" x2="240.000000" y2="100" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="260.000000" y1="100" x2="375" y2="100" style="stroke:rgb(0,0,0);stroke-width:2" />
+<path d="M 250.000000 100 q 2.5 -5 5 0" stroke="black" stroke-width="2" fill="none" />
+<path d="M 245.000000 100 q 2.5 5 5 0" stroke="black" stroke-width="2" fill="none" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="250" y="90">V2</text>
+</g><circle cx="500.000000" cy="100" r="10" stroke="black" stroke-width="2" fill="white" />
+<line x1="375" y1="100" x2="490.000000" y2="100" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="510.000000" y1="100" x2="625" y2="100" style="stroke:rgb(0,0,0);stroke-width:2" />
+<path d="M 500.000000 100 q 2.5 -5 5 0" stroke="black" stroke-width="2" fill="none" />
+<path d="M 495.000000 100 q 2.5 5 5 0" stroke="black" stroke-width="2" fill="none" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="500" y="90">V1</text>
+</g><circle id="pointA" cx="625" cy="100" r="1" />
+<circle id="pointA" cx="737.500000" cy="100" r="1" />
+<line x1="625" y1="100" x2="737.500000" y2="100" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="742.500000" cy="95" r="1" />
+<line x1="737.500000" y1="100" x2="742.500000" y2="95" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="747.500000" cy="105" r="1" />
+<line x1="742.500000" y1="95" x2="747.500000" y2="105" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="752.500000" cy="95" r="1" />
+<line x1="747.500000" y1="105" x2="752.500000" y2="95" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="757.500000" cy="105" r="1" />
+<line x1="752.500000" y1="95" x2="757.500000" y2="105" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="762.500000" cy="100" r="1" />
+<line x1="757.500000" y1="105" x2="762.500000" y2="100" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="762.500000" y1="100" x2="875" y2="100" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="875" cy="100" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="750" y="90">R1</text>
+</g><line x1="125" y1="130" x2="498.000000" y2="130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="498.000000" y1="126" x2="498.000000" y2="134" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="502.000000" y1="126" x2="502.000000" y2="134" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="502.000000" y1="130" x2="875" y2="130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="125" cy="130" r="1" />
+<circle id="pointA" cx="875" cy="130" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="500" y="120">C1</text>
+</g><line x1="125" y1="100" x2="125" y2="130" style="stroke:rgb(0,0,0);stroke-width:2.000000" />
+<circle id="pointA" cx="125" cy="100" r="1" />
+<circle id="pointA" cx="125" cy="130" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="125" y="160">NET0</text>
+</g><line x1="375" y1="100" x2="375" y2="130" style="stroke:rgb(0,0,0);stroke-width:0.100000" />
+<circle id="pointA" cx="375" cy="100" r="1" />
+<circle id="pointA" cx="375" cy="130" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="375" y="160">NET1</text>
+</g><line x1="625" y1="100" x2="625" y2="130" style="stroke:rgb(0,0,0);stroke-width:0.100000" />
+<circle id="pointA" cx="625" cy="100" r="1" />
+<circle id="pointA" cx="625" cy="130" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="625" y="160">NET2</text>
+</g><line x1="875" y1="100" x2="875" y2="130" style="stroke:rgb(0,0,0);stroke-width:2.000000" />
+<circle id="pointA" cx="875" cy="100" r="1" />
+<circle id="pointA" cx="875" cy="130" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="875" y="160">NET3</text>
+</g>
+</svg>

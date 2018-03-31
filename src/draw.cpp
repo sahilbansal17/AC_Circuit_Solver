@@ -16,7 +16,8 @@ struct component{
     char* name;
     int num, netStart, netEnd;
     double value; 
-    complex <double> current, voltage;  
+    complex <double> current, voltage; 
+    bool updated; // tells whether netStart and netEnd are swapped or not  
 };
 
 // comparison function to sort the components based on netEnd  
@@ -24,11 +25,36 @@ bool orderByNetEnd(const component &a, const component &b){
     return a.netEnd <= b.netEnd; // two components CAN have the same netEnd since THEN their diff between netEnds is same in the vector
 }
 
-void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs){
+inline void drawComponent(char name, int num, bool updated, int xCor1, int yCor, int xCor2, int cmax = 0){
+    switch(name){
+        case 'R':
+                drawResistor(xCor1, yCor + cmax*30, xCor2);
+                drawText("R"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10);
+                break;
+        case 'L':
+                drawInductor(xCor1, yCor + cmax*30, xCor2);
+                drawText("L"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10);
+                break;
+        case 'C':
+                drawCapacitor(xCor1, yCor + cmax*30, xCor2);
+                drawText("C"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10);
+                break;
+        case 'V':
+                drawVoltage(xCor1, yCor + cmax*30, xCor2);
+                drawText("V"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10);
+                break;
+        case 'I':
+                drawCurrent(xCor1, yCor, xCor2, updated); // draw +ve at ns and -ve at ne
+                drawText("I"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10);
+                break;
+    }
+}
+
+void drawMain(string fileName, int N, vector <element> el, vector <source> cs, vector <source> vs){
     int E = el.size(); // total number of circuit elements 
     int VS = vs.size(); // total no of voltage sources 
     int CS = cs.size(); // total no of current sources 
-    start(1000, 1000);
+    start(fileName, 1000, 1000);
     
     int distBWnets = 1000/N ; // assuming max nets is around 50 - 100
     int xNets[N]; // x coordinates of nets
@@ -36,9 +62,6 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
     xNets[0] = distBWnets/2;
     for(int i = 1; i < N; i ++){
         xNets[i] = xNets[i-1] + distBWnets;
-    }
-    for(int i = 0; i < N; i ++){
-        drawVerticalLine(xNets[i], yStart, yEnd);
     }
 
     vector < vector <component> > ordByNetDiff(N); // diff from 1 to N-1 (since total N nets, 0 till N-1) possible for these components  
@@ -56,6 +79,7 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
         int ns = el[i].netStart, ne = el[i].netEnd;
         if(ns > ne){
             swap(ns, ne);
+            c.updated = 1;
         }
         int diff = ne - ns;
         c.netStart  =   ns;
@@ -72,6 +96,7 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
         int ns = vs[i].netStart, ne = vs[i].netEnd;
         if(ns > ne){
             swap(ns, ne);
+            c.updated = 1;
         }
         int diff = ne - ns;
         c.netStart  =   ns;
@@ -87,6 +112,7 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
         int ns = cs[i].netStart, ne = cs[i].netEnd; 
         if(ns > ne){
             swap(ns, ne);
+            c.updated = 1;
         }
         int diff = ne - ns;
         c.netStart  =   ns;
@@ -105,13 +131,13 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
             while totalDrawnComponents not equal to DrawnComponentsWithNetDifference "i"
                 draw all those components that can have the same yCor based on the greedy technique 
                 
-                update yNet by 20 (since no more components can be drawn on the same line without an overlap)
+                update yNet by 30 (since no more components can be drawn on the same line without an overlap)
     
     THE PREVIOUS IMPLEMENTATION ALGO IS NOT APPROPRIATE WHEN TWO ELEMENTS HAVING THE SAME NET START AND NET END 
     
     CHANGES:
         If more than two components have same net end and net start, 
-        draw them in parallel in the same iteration but increment yNet by 20*(max no of such components between any two nets in this iteration)
+        draw them in parallel in the same iteration but increment yNet by 30*(max no of such components between any two nets in this iteration)
         to avoid conflicts (overlaps) in the next iteration 
     
     */
@@ -132,9 +158,9 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
         int countedC = 0, startC = 0;
         // startC for 1st component in each iteration 
         while(countedC != drawComp){
-            // int yIncrement = 20; // default 
+            // int yIncrement = 30; // default 
             int maxBWtwoNets = 1; // default 
-            // yNet += 20 * maxBWtwoNets; this will be used at the end of iteration now 
+            // yNet += 30 * maxBWtwoNets; this will be used at the end of iteration now 
             int flagUpdatedStart = 0;
             // draw 1st component (startC) independently so that ns and ne can be updated accordingly
             c = ordByNetDiff[i][startC];
@@ -143,23 +169,7 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
             xCor1 = xNets[ns], xCor2 = xNets[ne];
             yCor = yNet;
             // cout << "Drawing " << name << ": " << ns << " to " << ne << "\n";
-            switch(name){
-                case 'R':
-                        drawResistor(xCor1, yCor, xCor2);
-                        break;
-                case 'L':
-                        drawInductor(xCor1, yCor, xCor2);
-                        break;
-                case 'C':
-                        drawCapacitor(xCor1, yCor, xCor2);
-                        break;
-                case 'V':
-                        drawVoltage(xCor1, yCor, xCor2);
-                        break;
-                case 'I':
-                        drawCurrent(xCor1, yCor, xCor2);
-                        break;
-            }
+            drawComponent(name, c.num, c.updated, xCor1, yCor, xCor2);
             visitedC[startC] = 1;
             countedC ++;
             int cmax = 1; // for one iteration, the current max between current ns and ne 
@@ -176,23 +186,7 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
                         // we won't change yNet but while drawing, we use an incrementer for yNet
                         
                         // cout << "Drawing " << name << ": " << ns << " to " << ne << "\n";
-                        switch(name){
-                            case 'R':
-                                    drawResistor(xCor1, yCor + cmax*20, xCor2);
-                                    break;
-                            case 'L':
-                                    drawInductor(xCor1, yCor + cmax*20, xCor2);
-                                    break;
-                            case 'C':
-                                    drawCapacitor(xCor1, yCor + cmax*20, xCor2);
-                                    break;
-                            case 'V':
-                                    drawVoltage(xCor1, yCor + cmax*20, xCor2);
-                                    break;
-                            case 'I':
-                                    drawCurrent(xCor1, yCor + cmax*20, xCor2);
-                                    break;
-                        }
+                        drawComponent(name, c.num, c.updated, xCor1, yCor, xCor2, cmax);
                         visitedC[j] = 1;
                         countedC ++;
                         cmax ++;
@@ -209,23 +203,7 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
                         name = c.name[0];
                         xCor1 = xNets[ns], xCor2 = xNets[ne];
                         // cout << "Drawing " << name << ": " << ns << " to " << ne << "\n";
-                        switch(name){
-                            case 'R':
-                                    drawResistor(xCor1, yCor, xCor2);
-                                    break;
-                            case 'L':
-                                    drawInductor(xCor1, yCor, xCor2);
-                                    break;
-                            case 'C':
-                                    drawCapacitor(xCor1, yCor, xCor2);
-                                    break;
-                            case 'V':
-                                    drawVoltage(xCor1, yCor, xCor2);
-                                    break;
-                            case 'I':
-                                    drawCurrent(xCor1, yCor, xCor2);
-                                    break;
-                        }
+                        drawComponent(name, c.num, c.updated, xCor1, yCor, xCor2);
                         visitedC[j] = 1;
                         countedC ++;
                     }
@@ -236,9 +214,20 @@ void drawMain(int N, vector <element> el, vector <source> cs, vector <source> vs
                     }
                 }
             }
-            yNet += 20*maxBWtwoNets; // update for next iteration of loop 
+            yNet += 30*maxBWtwoNets; // update for next iteration of loop 
         }
     }
     
+    yEnd = yNet - 30;  // last components drawn at this line
+    // draw vertical lines for nets 
+    for(int i = 0; i < N; i ++){
+        // draw ending nets thicker 
+        if(i == 0 || i == N - 1)
+            drawVerticalLine(xNets[i], yStart, yEnd, 2);
+        else
+            drawVerticalLine(xNets[i], yStart, yEnd, 0.1);
+        string res = "NET"+to_string(i);
+        drawText(res, xNets[i], yEnd + 30);
+    }
     end();
 }
