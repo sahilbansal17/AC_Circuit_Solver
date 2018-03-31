@@ -1,0 +1,103 @@
+\documentclass[]{article}
+\usepackage[left=0.7in,right=0.7in,top=0.9in,bottom=0.5in]{geometry}
+\usepackage{amsmath}
+%opening
+\title{\textbf{COP290 : Assignment 2 - AC Circuit Solver \\ Design Document}}
+\author{Sahil Bansal (2016CSJ0008) \& Sahil Singh(2016CSJ0025)}
+
+\begin{document}
+
+\maketitle
+
+\section{\LARGE Overall Design :}
+\Large
+An object-oriented design is followed and the code is properly structured into several cpp and header files. The sub-components are described in detail below. Also, all the algorithms used are briefly touched upon.
+
+\section{\LARGE Sub-Components :}
+\begin{itemize}
+	\item \textbf{ac\_circuit\_solver.cpp} is the main file for the entire project and contains the code for solving the circuit, and also calls the \textbf{parse} and \textbf{draw} functions.
+	\item \textbf{draw.h} and \textbf{draw.cpp}: They contain the main function to draw the entire circuit.
+	\item \textbf{parse.h} and \textbf{parse.cpp}: They contain the element and source structures and their vectors obtained after parsing the input netlist.
+	\item \textbf{parseCircuit.y} is the yacc file used while parsing.
+	\item \textbf{scanCircuit.l} is the lex file used while scanning.
+	\item \textbf{svg.h} and \textbf{svg.cpp}: They contain the SVG functions used for drawing individual elements and implement onClick events on the text to get an alert box showing statistics of the element when clicked. 
+	\item \textbf{Eigen} library is used for generating and solving the matrices. 
+\end{itemize}
+
+\section{\LARGE Testing Sub-Components :}
+\subsection{Scanner :}
+\Large 
+\begin{itemize}
+	\item The parser is checked by writing some cases that may violate the syntax or semantic rules. Such case(s) are defined in the \textbf{Public\_cases/syntacticCases} folder. Also, in the test cases provided, cases numbered 2 and 5 don't follow the rules of the netlist as enforced in the README. 
+	 \end{itemize}
+ 
+\subsection{Parser :}
+\Large\begin{itemize}
+	\item It is checked by printing the values stored in the \textbf{sourceElements} and \textbf{circuitElements} vectors declared in the \textbf{parse.h} file. 
+	\item This print function is now moved to \textbf{ac\_circuit\_solver.cpp} and prints to the terminal. It can be verified that the input netlist is stored properly from the terminal.
+	\end{itemize}
+
+\subsection{SVG :}
+\Large\begin{itemize}
+	\item The SVG functions defined were checked manually by calling all of them in a temporary main function defined in \textbf{svg.cpp} just for the purpose of testing. 	
+\end{itemize}
+
+\subsection{Draw :}
+\Large\begin{itemize}
+	\item Some test cases were designed and are kept in the \textbf{Public\_cases/solveCases} folder.
+	\item A script \textbf{testScript.sh} was written to simultaneously run all these test cases.
+	\item The generated SVG outputs were manually then checked for any errors and the errors were corrected as and when they came.
+\end{itemize}
+
+\subsection{Solve :}
+\Large\begin{itemize}
+	\item The solving part was checked by separately running the file \textbf{ac\_circuit\_solver.cpp}.
+	\item For the two solved test cases provided, the matrices used in \textbf{MNA algorithm} were all printed to the screen and calculated manually and matched.
+	\item The output currents and voltages along with phases were also then matched with the outputs provided. 
+	\item Further testing was done on all the cases in the \textbf{Public\_cases/solveCases} folder to make sure that the algorithm terminated. 
+\end{itemize}
+
+\section{\LARGE Algorithm used for drawing the Circuit :}
+\Large 
+\begin{itemize}
+	\item The components are seperated into different vectors each containing those components whose difference between starting and ending nets is the same.
+	\item It is made sure that for each component the starting net value is smaller than the ending net value. Also, this does not effect the polarity of current or voltage sources as this part is separate from solving. Moreover, \textbf{drawMain function is called after solving the circuit to make sure that elements can be made interactable easily}.
+	\item Each of these vector is then sorted based on the ending net value. 
+	\item A loop is then run, starting from those elements with the highest net difference value. 
+	\item All the elements with the same net difference values are drawn in a particular iteration of the loop.
+	\item It contains another nested loop which is for a greedy technique applied to draw the elements such that the next elements' starting net will be higher or equal to the ending net of previous component. This makes sure that maximum no of disjoint components are drawn in a single line. 
+	\item If there are some components which are connected in parallel, this case has also been handled by drawing all such elements first and then moving to the next iteration in another nested loop. 
+\end{itemize}
+
+\section{\LARGE Modified Nodal Analysis for solving the Circuit :}
+\Large
+\begin{itemize}
+	\item In brief, this method, after applying \textbf{Kirchoff's current law} to each node by using some conventions and then writing equations for voltages of each voltage source, reduces the circuit into the form:
+	\[AX = Z\]
+	where A, X, and Z are all complex matrices. Further,
+	\[A = \begin{pmatrix} G & B\\ C & D \end{pmatrix}\]
+	where G contains the admittances of the passive elements \& B, C and D depend on the active sources and contain only either 1, 0 or -1.
+	\[Z= \begin{pmatrix} I\\ E \end{pmatrix}\]
+	where I contains the net current at each node and E contains the known voltage sources. 
+	The matrix \textbf{X} obtained after solving the equation is:
+	\[X= \begin{pmatrix} v\\ j \end{pmatrix}\]
+	where \textbf{v} obtained contains the voltages at each node and \textbf{j} contains the current supplied by each voltage source. 
+	\item These matrices are suitably constructed and then after solving:
+	\begin{itemize}
+		\item The voltage across an element is simply the difference of voltages across its starting and ending net.
+		\item The current, thus across it is simply the product of its \textbf{admittance} and the voltage thus obtained.
+	\end{itemize}
+	\item For the case when there are \textbf{multiple sources of different frequencies}:
+	\begin{itemize}
+		\item First, they are sorted in non-decreasing order of their frequencies.
+		\item Then, only those which have the same frequency are considered active at a time. 
+		\item The matrices are suitable reconstructed or adjusted to handle such case. 
+	\end{itemize} 
+\end{itemize}
+
+\section{\LARGE Interactable SVG :}
+\Large 
+The text used for a particular element is provided with a \textbf{onClick} attribute containing the function which takes all the values of the element to be shown as paramters. This function is included in the \textbf{script} tag nested inside the SVG tag and handled by the \textbf{addInteraction} function defined in the \textbf{svg.cpp} file. The arguments are directly passed through the \textbf{drawText} function called while drawing the text in the \textbf{draw.cpp} file. 
+
+\end{document}
+
