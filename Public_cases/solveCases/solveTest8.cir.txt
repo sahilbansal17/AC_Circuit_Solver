@@ -1,0 +1,18 @@
+==============================================================
+FREQ = 0.09KHz
+
+VOLTAGES OF ELEMENTS
+R1 11000 0
+C1 8841.94 -90
+
+VOLTAGE OF ACTIVE SOURCES
+V2 5 0
+I1 14117 141.22
+
+CURRENT OF ELEMENTS
+R1 5 0
+C1 5 0
+
+CURRENT OF ACTIVE SOURCES
+V2 5 0
+I1 5 0

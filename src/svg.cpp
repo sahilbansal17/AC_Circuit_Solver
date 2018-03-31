@@ -236,7 +236,7 @@ void drawText(string txt, int X1, int Y1) {
 }
 
 void start(string fileName, int h, int w) {
-    fout.open(fileName+".svg");
+    fout.open(fileName);
     fout << "<svg height=\"" << to_string(h) << "\" width= \"" << to_string(w)
          << "\" xmlns=\"http://www.w3.org/2000/svg\">";
 }

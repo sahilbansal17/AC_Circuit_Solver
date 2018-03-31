@@ -16,3 +16,31 @@ R4 Net1 Net3 10
 R4 Net1 Net3 10
 R5 Net3 0 4
 R6 Net2 Net4 6
+
+V1 Net9 Net10 SINE ( 0 40 0.159Khz 0.0S )
+R1 Net11 Net12 2
+R2 Net2 Net13 9
+R3 Net3 Net14 8
+R3 Net3 Net15 8
+R3 Net3 Net16 8
+R3 Net3 Net17 8
+I1 Net18 0 SINE ( 0 1 0.159Khz 0.0S )
+R4 Net19 0 10
+R4 Net12 0 10
+R4 Net12 0 10
+I1 Net13 Net1 SINE ( 0 1 0.9Khz 0.0S )
+V1 Net11 Net4 SINE ( 0 1 0.001Khz 0.0S )
+R4 Net12 0 10
+R4 Net12 Net3 10
+R4 Net13 Net3 10
+R5 Net13 0 4
+R6 Net18 Net19 6
+R6 Net20 Net21 6
+R6 Net19 Net21 6
+R6 Net20 Net22 6
+R6 Net1 Net24 6
+R6 Net2 Net23 6
+R6 Net3 Net23 6
+R6 Net4 Net23 6
+R6 Net5 Net23 6
+R6 Net6 Net23 6

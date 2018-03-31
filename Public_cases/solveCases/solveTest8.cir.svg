@@ -14,9 +14,10 @@
 </g><circle cx="275.000000" cy="230" r="10" stroke="black" stroke-width="2" fill="white" />
 <line x1="250" y1="230" x2="265.000000" y2="230" style="stroke:rgb(0,0,0);stroke-width:2" />
 <line x1="285.000000" y1="230" x2="300" y2="230" style="stroke:rgb(0,0,0);stroke-width:2" />
-<path d="M 275.000000 230 q 2.5 -5 5 0" stroke="black" stroke-width="2" fill="none" />
-<path d="M 270.000000 230 q 2.5 5 5 0" stroke="black" stroke-width="2" fill="none" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
-<text x="275" y="220">V1</text>
+<line x1="267.000000" y1="230" x2="270.000000" y2="230" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="280.000000" y1="230" x2="283.000000" y2="230" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="281.500000" y1="228.500000" x2="281.500000" y2="231.500000" style="stroke:rgb(0,0,0);stroke-width:1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="275" y="220">I1</text>
 </g><circle id="pointA" cx="300" cy="230" r="1" />
 <circle id="pointA" cx="312.500000" cy="230" r="1" />
 <line x1="300" y1="230" x2="312.500000" y2="230" style="stroke:rgb(0,0,0);stroke-width:2" />

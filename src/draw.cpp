@@ -54,18 +54,21 @@ void drawMain(string fileName, int N, vector <element> el, vector <source> cs, v
     int E = el.size(); // total number of circuit elements 
     int VS = vs.size(); // total no of voltage sources 
     int CS = cs.size(); // total no of current sources 
-    start(fileName, 1000, 1000);
     
-    int distBWnets = 1000/N ; // assuming max nets is around 50 - 100
+    int distBWnets = 50 ; // fixed 
     int xNets[N]; // x coordinates of nets
-    int yStart = 100, yEnd = 800; // end points for vertical nets 
-    xNets[0] = distBWnets/2;
+    int yStart = 200, yEnd; // end points for vertical nets 
+    xNets[0] = 200;
     for(int i = 1; i < N; i ++){
         xNets[i] = xNets[i-1] + distBWnets;
     }
-
+    
+    int height = 200 + 30*(E + VS + CS) + 40 ; // this is the max possible height, all connections in parallel, each connection has height of around 30, extra 40 for text 
+    int width = xNets[N-1] + 100; // maximum width of the screen 
+    start(fileName, height, width);
+    
     vector < vector <component> > ordByNetDiff(N); // diff from 1 to N-1 (since total N nets, 0 till N-1) possible for these components  
-    int yNet = 100; // this will store the starting yCor for next elements to be drawn 
+    int yNet = 200; // this will store the starting yCor for next elements to be drawn 
     
     component c;
 
@@ -127,7 +130,7 @@ void drawMain(string fileName, int N, vector <element> el, vector <source> cs, v
     2.
         sort each vector ordByNetDiff[i] based on the netEnd so that a greedy technique can be used to draw the MAXIMUM disjoint set of components of a particular "net difference value"
     3.    
-        for i = 1: maxNetDifference 
+        for i = maxNetDifference->1 // changed since better visualization obtained 
             while totalDrawnComponents not equal to DrawnComponentsWithNetDifference "i"
                 draw all those components that can have the same yCor based on the greedy technique 
                 
@@ -147,7 +150,7 @@ void drawMain(string fileName, int N, vector <element> el, vector <source> cs, v
         sort(ordByNetDiff[i].begin(), ordByNetDiff[i].end(), orderByNetEnd);
     }
     
-    for(int i = 1 ; i < N ; i ++){
+    for(int i = N-1 ; i >= 1 ; i --){
         // no of components to draw 
         int drawComp = ordByNetDiff[i].size();
         int xCor1, xCor2, yCor, ns, ne;
@@ -225,7 +228,7 @@ void drawMain(string fileName, int N, vector <element> el, vector <source> cs, v
         if(i == 0 || i == N - 1)
             drawVerticalLine(xNets[i], yStart, yEnd, 2);
         else
-            drawVerticalLine(xNets[i], yStart, yEnd, 0.1);
+            drawVerticalLine(xNets[i], yStart, yEnd, 0.5);
         string res = "NET"+to_string(i);
         drawText(res, xNets[i], yEnd + 30);
     }

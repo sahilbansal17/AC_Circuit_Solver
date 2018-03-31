@@ -1,0 +1,746 @@
+<svg height="1590" width= "1500" xmlns="http://www.w3.org/2000/svg"><circle id="pointA" cx="250" cy="200" r="1" />
+<circle id="pointA" cx="812.500000" cy="200" r="1" />
+<line x1="250" y1="200" x2="812.500000" y2="200" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="817.500000" cy="195" r="1" />
+<line x1="812.500000" y1="200" x2="817.500000" y2="195" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="822.500000" cy="205" r="1" />
+<line x1="817.500000" y1="195" x2="822.500000" y2="205" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="827.500000" cy="195" r="1" />
+<line x1="822.500000" y1="205" x2="827.500000" y2="195" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="832.500000" cy="205" r="1" />
+<line x1="827.500000" y1="195" x2="832.500000" y2="205" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="837.500000" cy="200" r="1" />
+<line x1="832.500000" y1="205" x2="837.500000" y2="200" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="837.500000" y1="200" x2="1400" y2="200" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1400" cy="200" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="825" y="190">R6</text>
+</g><circle id="pointA" cx="300" cy="230" r="1" />
+<circle id="pointA" cx="812.500000" cy="230" r="1" />
+<line x1="300" y1="230" x2="812.500000" y2="230" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="817.500000" cy="225" r="1" />
+<line x1="812.500000" y1="230" x2="817.500000" y2="225" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="822.500000" cy="235" r="1" />
+<line x1="817.500000" y1="225" x2="822.500000" y2="235" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="827.500000" cy="225" r="1" />
+<line x1="822.500000" y1="235" x2="827.500000" y2="225" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="832.500000" cy="235" r="1" />
+<line x1="827.500000" y1="225" x2="832.500000" y2="235" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="837.500000" cy="230" r="1" />
+<line x1="832.500000" y1="235" x2="837.500000" y2="230" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="837.500000" y1="230" x2="1350" y2="230" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1350" cy="230" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="825" y="220">R6</text>
+</g><circle id="pointA" cx="350" cy="260" r="1" />
+<circle id="pointA" cx="837.500000" cy="260" r="1" />
+<line x1="350" y1="260" x2="837.500000" y2="260" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="842.500000" cy="255" r="1" />
+<line x1="837.500000" y1="260" x2="842.500000" y2="255" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="847.500000" cy="265" r="1" />
+<line x1="842.500000" y1="255" x2="847.500000" y2="265" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="852.500000" cy="255" r="1" />
+<line x1="847.500000" y1="265" x2="852.500000" y2="255" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="857.500000" cy="265" r="1" />
+<line x1="852.500000" y1="255" x2="857.500000" y2="265" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="862.500000" cy="260" r="1" />
+<line x1="857.500000" y1="265" x2="862.500000" y2="260" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="862.500000" y1="260" x2="1350" y2="260" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1350" cy="260" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="850" y="250">R6</text>
+</g><circle id="pointA" cx="200" cy="290" r="1" />
+<circle id="pointA" cx="662.500000" cy="290" r="1" />
+<line x1="200" y1="290" x2="662.500000" y2="290" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="667.500000" cy="285" r="1" />
+<line x1="662.500000" y1="290" x2="667.500000" y2="285" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="672.500000" cy="295" r="1" />
+<line x1="667.500000" y1="285" x2="672.500000" y2="295" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="677.500000" cy="285" r="1" />
+<line x1="672.500000" y1="295" x2="677.500000" y2="285" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="682.500000" cy="295" r="1" />
+<line x1="677.500000" y1="285" x2="682.500000" y2="295" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="687.500000" cy="290" r="1" />
+<line x1="682.500000" y1="295" x2="687.500000" y2="290" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="687.500000" y1="290" x2="1150" y2="290" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1150" cy="290" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="675" y="280">R4</text>
+</g><circle id="pointA" cx="400" cy="320" r="1" />
+<circle id="pointA" cx="862.500000" cy="320" r="1" />
+<line x1="400" y1="320" x2="862.500000" y2="320" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="867.500000" cy="315" r="1" />
+<line x1="862.500000" y1="320" x2="867.500000" y2="315" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="872.500000" cy="325" r="1" />
+<line x1="867.500000" y1="315" x2="872.500000" y2="325" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="877.500000" cy="315" r="1" />
+<line x1="872.500000" y1="325" x2="877.500000" y2="315" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="882.500000" cy="325" r="1" />
+<line x1="877.500000" y1="315" x2="882.500000" y2="325" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="887.500000" cy="320" r="1" />
+<line x1="882.500000" y1="325" x2="887.500000" y2="320" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="887.500000" y1="320" x2="1350" y2="320" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1350" cy="320" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="875" y="310">R6</text>
+</g><circle cx="650.000000" cy="350" r="10" stroke="black" stroke-width="2" fill="white" />
+<line x1="200" y1="350" x2="640.000000" y2="350" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="660.000000" y1="350" x2="1100" y2="350" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="642.000000" y1="350" x2="645.000000" y2="350" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="655.000000" y1="350" x2="658.000000" y2="350" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="656.500000" y1="348.500000" x2="656.500000" y2="351.500000" style="stroke:rgb(0,0,0);stroke-width:1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="650" y="340">I1</text>
+</g><circle id="pointA" cx="450" cy="380" r="1" />
+<circle id="pointA" cx="887.500000" cy="380" r="1" />
+<line x1="450" y1="380" x2="887.500000" y2="380" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="892.500000" cy="375" r="1" />
+<line x1="887.500000" y1="380" x2="892.500000" y2="375" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="897.500000" cy="385" r="1" />
+<line x1="892.500000" y1="375" x2="897.500000" y2="385" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="902.500000" cy="375" r="1" />
+<line x1="897.500000" y1="385" x2="902.500000" y2="375" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="907.500000" cy="385" r="1" />
+<line x1="902.500000" y1="375" x2="907.500000" y2="385" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="912.500000" cy="380" r="1" />
+<line x1="907.500000" y1="385" x2="912.500000" y2="380" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="912.500000" y1="380" x2="1350" y2="380" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1350" cy="380" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="900" y="370">R6</text>
+</g><circle id="pointA" cx="500" cy="410" r="1" />
+<circle id="pointA" cx="912.500000" cy="410" r="1" />
+<line x1="500" y1="410" x2="912.500000" y2="410" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="917.500000" cy="405" r="1" />
+<line x1="912.500000" y1="410" x2="917.500000" y2="405" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="922.500000" cy="415" r="1" />
+<line x1="917.500000" y1="405" x2="922.500000" y2="415" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="927.500000" cy="405" r="1" />
+<line x1="922.500000" y1="415" x2="927.500000" y2="405" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="932.500000" cy="415" r="1" />
+<line x1="927.500000" y1="405" x2="932.500000" y2="415" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="937.500000" cy="410" r="1" />
+<line x1="932.500000" y1="415" x2="937.500000" y2="410" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="937.500000" y1="410" x2="1350" y2="410" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1350" cy="410" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="925" y="400">R6</text>
+</g><circle id="pointA" cx="350" cy="440" r="1" />
+<circle id="pointA" cx="687.500000" cy="440" r="1" />
+<line x1="350" y1="440" x2="687.500000" y2="440" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="692.500000" cy="435" r="1" />
+<line x1="687.500000" y1="440" x2="692.500000" y2="435" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="697.500000" cy="445" r="1" />
+<line x1="692.500000" y1="435" x2="697.500000" y2="445" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="702.500000" cy="435" r="1" />
+<line x1="697.500000" y1="445" x2="702.500000" y2="435" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="707.500000" cy="445" r="1" />
+<line x1="702.500000" y1="435" x2="707.500000" y2="445" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="712.500000" cy="440" r="1" />
+<line x1="707.500000" y1="445" x2="712.500000" y2="440" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="712.500000" y1="440" x2="1050" y2="440" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1050" cy="440" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="700" y="430">R3</text>
+</g><circle id="pointA" cx="200" cy="470" r="1" />
+<circle id="pointA" cx="512.500000" cy="470" r="1" />
+<line x1="200" y1="470" x2="512.500000" y2="470" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="517.500000" cy="465" r="1" />
+<line x1="512.500000" y1="470" x2="517.500000" y2="465" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="522.500000" cy="475" r="1" />
+<line x1="517.500000" y1="465" x2="522.500000" y2="475" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="527.500000" cy="465" r="1" />
+<line x1="522.500000" y1="475" x2="527.500000" y2="465" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="532.500000" cy="475" r="1" />
+<line x1="527.500000" y1="465" x2="532.500000" y2="475" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="537.500000" cy="470" r="1" />
+<line x1="532.500000" y1="475" x2="537.500000" y2="470" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="537.500000" y1="470" x2="850" y2="470" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="850" cy="470" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="525" y="460">R5</text>
+</g><circle id="pointA" cx="350" cy="500" r="1" />
+<circle id="pointA" cx="662.500000" cy="500" r="1" />
+<line x1="350" y1="500" x2="662.500000" y2="500" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="667.500000" cy="495" r="1" />
+<line x1="662.500000" y1="500" x2="667.500000" y2="495" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="672.500000" cy="505" r="1" />
+<line x1="667.500000" y1="495" x2="672.500000" y2="505" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="677.500000" cy="495" r="1" />
+<line x1="672.500000" y1="505" x2="677.500000" y2="495" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="682.500000" cy="505" r="1" />
+<line x1="677.500000" y1="495" x2="682.500000" y2="505" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="687.500000" cy="500" r="1" />
+<line x1="682.500000" y1="505" x2="687.500000" y2="500" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="687.500000" y1="500" x2="1000" y2="500" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1000" cy="500" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="675" y="490">R3</text>
+</g><circle id="pointA" cx="200" cy="530" r="1" />
+<circle id="pointA" cx="487.500000" cy="530" r="1" />
+<line x1="200" y1="530" x2="487.500000" y2="530" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="492.500000" cy="525" r="1" />
+<line x1="487.500000" y1="530" x2="492.500000" y2="525" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="497.500000" cy="535" r="1" />
+<line x1="492.500000" y1="525" x2="497.500000" y2="535" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="502.500000" cy="525" r="1" />
+<line x1="497.500000" y1="535" x2="502.500000" y2="525" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="507.500000" cy="535" r="1" />
+<line x1="502.500000" y1="525" x2="507.500000" y2="535" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="512.500000" cy="530" r="1" />
+<line x1="507.500000" y1="535" x2="512.500000" y2="530" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="512.500000" y1="530" x2="800" y2="530" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="800" cy="530" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="500" y="520">R4</text>
+</g><circle id="pointA" cx="200" cy="560" r="1" />
+<circle id="pointA" cx="487.500000" cy="560" r="1" />
+<line x1="200" y1="560" x2="487.500000" y2="560" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="492.500000" cy="555" r="1" />
+<line x1="487.500000" y1="560" x2="492.500000" y2="555" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="497.500000" cy="565" r="1" />
+<line x1="492.500000" y1="555" x2="497.500000" y2="565" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="502.500000" cy="555" r="1" />
+<line x1="497.500000" y1="565" x2="502.500000" y2="555" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="507.500000" cy="565" r="1" />
+<line x1="502.500000" y1="555" x2="507.500000" y2="565" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="512.500000" cy="560" r="1" />
+<line x1="507.500000" y1="565" x2="512.500000" y2="560" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="512.500000" y1="560" x2="800" y2="560" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="800" cy="560" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="500" y="550">R4</text>
+</g><circle id="pointA" cx="200" cy="590" r="1" />
+<circle id="pointA" cx="487.500000" cy="590" r="1" />
+<line x1="200" y1="590" x2="487.500000" y2="590" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="492.500000" cy="585" r="1" />
+<line x1="487.500000" y1="590" x2="492.500000" y2="585" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="497.500000" cy="595" r="1" />
+<line x1="492.500000" y1="585" x2="497.500000" y2="595" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="502.500000" cy="585" r="1" />
+<line x1="497.500000" y1="595" x2="502.500000" y2="585" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="507.500000" cy="595" r="1" />
+<line x1="502.500000" y1="585" x2="507.500000" y2="595" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="512.500000" cy="590" r="1" />
+<line x1="507.500000" y1="595" x2="512.500000" y2="590" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="512.500000" y1="590" x2="800" y2="590" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="800" cy="590" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="500" y="580">R4</text>
+</g><circle cx="550.000000" cy="620" r="10" stroke="black" stroke-width="2" fill="white" />
+<line x1="250" y1="620" x2="540.000000" y2="620" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="560.000000" y1="620" x2="850" y2="620" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="542.000000" y1="620" x2="545.000000" y2="620" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="555.000000" y1="620" x2="558.000000" y2="620" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="556.500000" y1="618.500000" x2="556.500000" y2="621.500000" style="stroke:rgb(0,0,0);stroke-width:1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="550" y="610">I1</text>
+</g><circle id="pointA" cx="350" cy="650" r="1" />
+<circle id="pointA" cx="637.500000" cy="650" r="1" />
+<line x1="350" y1="650" x2="637.500000" y2="650" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="642.500000" cy="645" r="1" />
+<line x1="637.500000" y1="650" x2="642.500000" y2="645" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="647.500000" cy="655" r="1" />
+<line x1="642.500000" y1="645" x2="647.500000" y2="655" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="652.500000" cy="645" r="1" />
+<line x1="647.500000" y1="655" x2="652.500000" y2="645" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="657.500000" cy="655" r="1" />
+<line x1="652.500000" y1="645" x2="657.500000" y2="655" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="662.500000" cy="650" r="1" />
+<line x1="657.500000" y1="655" x2="662.500000" y2="650" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="662.500000" y1="650" x2="950" y2="650" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="950" cy="650" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="650" y="640">R3</text>
+</g><circle id="pointA" cx="300" cy="680" r="1" />
+<circle id="pointA" cx="562.500000" cy="680" r="1" />
+<line x1="300" y1="680" x2="562.500000" y2="680" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="567.500000" cy="675" r="1" />
+<line x1="562.500000" y1="680" x2="567.500000" y2="675" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="572.500000" cy="685" r="1" />
+<line x1="567.500000" y1="675" x2="572.500000" y2="685" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="577.500000" cy="675" r="1" />
+<line x1="572.500000" y1="685" x2="577.500000" y2="675" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="582.500000" cy="685" r="1" />
+<line x1="577.500000" y1="675" x2="582.500000" y2="685" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="587.500000" cy="680" r="1" />
+<line x1="582.500000" y1="685" x2="587.500000" y2="680" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="587.500000" y1="680" x2="850" y2="680" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="850" cy="680" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="575" y="670">R2</text>
+</g><circle id="pointA" cx="350" cy="710" r="1" />
+<circle id="pointA" cx="612.500000" cy="710" r="1" />
+<line x1="350" y1="710" x2="612.500000" y2="710" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="617.500000" cy="705" r="1" />
+<line x1="612.500000" y1="710" x2="617.500000" y2="705" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="622.500000" cy="715" r="1" />
+<line x1="617.500000" y1="705" x2="622.500000" y2="715" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="627.500000" cy="705" r="1" />
+<line x1="622.500000" y1="715" x2="627.500000" y2="705" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="632.500000" cy="715" r="1" />
+<line x1="627.500000" y1="705" x2="632.500000" y2="715" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="637.500000" cy="710" r="1" />
+<line x1="632.500000" y1="715" x2="637.500000" y2="710" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="637.500000" y1="710" x2="900" y2="710" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="900" cy="710" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="625" y="700">R3</text>
+</g><circle id="pointA" cx="350" cy="740" r="1" />
+<circle id="pointA" cx="587.500000" cy="740" r="1" />
+<line x1="350" y1="740" x2="587.500000" y2="740" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="592.500000" cy="735" r="1" />
+<line x1="587.500000" y1="740" x2="592.500000" y2="735" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="597.500000" cy="745" r="1" />
+<line x1="592.500000" y1="735" x2="597.500000" y2="745" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="602.500000" cy="735" r="1" />
+<line x1="597.500000" y1="745" x2="602.500000" y2="735" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="607.500000" cy="745" r="1" />
+<line x1="602.500000" y1="735" x2="607.500000" y2="745" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="612.500000" cy="740" r="1" />
+<line x1="607.500000" y1="745" x2="612.500000" y2="740" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="612.500000" y1="740" x2="850" y2="740" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="850" cy="740" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="600" y="730">R4</text>
+</g><circle id="pointA" cx="350" cy="770" r="1" />
+<circle id="pointA" cx="562.500000" cy="770" r="1" />
+<line x1="350" y1="770" x2="562.500000" y2="770" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="567.500000" cy="765" r="1" />
+<line x1="562.500000" y1="770" x2="567.500000" y2="765" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="572.500000" cy="775" r="1" />
+<line x1="567.500000" y1="765" x2="572.500000" y2="775" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="577.500000" cy="765" r="1" />
+<line x1="572.500000" y1="775" x2="577.500000" y2="765" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="582.500000" cy="775" r="1" />
+<line x1="577.500000" y1="765" x2="582.500000" y2="775" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="587.500000" cy="770" r="1" />
+<line x1="582.500000" y1="775" x2="587.500000" y2="770" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="587.500000" y1="770" x2="800" y2="770" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="800" cy="770" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="575" y="760">R4</text>
+</g><circle cx="575.000000" cy="800" r="10" stroke="black" stroke-width="2" fill="white" />
+<line x1="400" y1="800" x2="565.000000" y2="800" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="585.000000" y1="800" x2="750" y2="800" style="stroke:rgb(0,0,0);stroke-width:2" />
+<path d="M 575.000000 800 q 2.5 -5 5 0" stroke="black" stroke-width="2" fill="none" />
+<path d="M 570.000000 800 q 2.5 5 5 0" stroke="black" stroke-width="2" fill="none" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="575" y="790">V1</text>
+</g><circle cx="300.000000" cy="830" r="10" stroke="black" stroke-width="2" fill="white" />
+<line x1="200" y1="830" x2="290.000000" y2="830" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="310.000000" y1="830" x2="400" y2="830" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="292.000000" y1="830" x2="295.000000" y2="830" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="305.000000" y1="830" x2="308.000000" y2="830" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="306.500000" y1="828.500000" x2="306.500000" y2="831.500000" style="stroke:rgb(0,0,0);stroke-width:1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="300" y="820">I1</text>
+</g><circle id="pointA" cx="200" cy="860" r="1" />
+<circle id="pointA" cx="262.500000" cy="860" r="1" />
+<line x1="200" y1="860" x2="262.500000" y2="860" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="267.500000" cy="855" r="1" />
+<line x1="262.500000" y1="860" x2="267.500000" y2="855" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="272.500000" cy="865" r="1" />
+<line x1="267.500000" y1="855" x2="272.500000" y2="865" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="277.500000" cy="855" r="1" />
+<line x1="272.500000" y1="865" x2="277.500000" y2="855" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="282.500000" cy="865" r="1" />
+<line x1="277.500000" y1="855" x2="282.500000" y2="865" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="287.500000" cy="860" r="1" />
+<line x1="282.500000" y1="865" x2="287.500000" y2="860" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="287.500000" y1="860" x2="350" y2="860" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="350" cy="860" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="275" y="850">R5</text>
+</g><circle cx="325.000000" cy="890" r="10" stroke="black" stroke-width="2" fill="white" />
+<line x1="250" y1="890" x2="315.000000" y2="890" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="335.000000" y1="890" x2="400" y2="890" style="stroke:rgb(0,0,0);stroke-width:2" />
+<path d="M 325.000000 890 q 2.5 -5 5 0" stroke="black" stroke-width="2" fill="none" />
+<path d="M 320.000000 890 q 2.5 5 5 0" stroke="black" stroke-width="2" fill="none" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="325" y="880">V1</text>
+</g><circle id="pointA" cx="200" cy="920" r="1" />
+<circle id="pointA" cx="237.500000" cy="920" r="1" />
+<line x1="200" y1="920" x2="237.500000" y2="920" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="242.500000" cy="915" r="1" />
+<line x1="237.500000" y1="920" x2="242.500000" y2="915" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="247.500000" cy="925" r="1" />
+<line x1="242.500000" y1="915" x2="247.500000" y2="925" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="252.500000" cy="915" r="1" />
+<line x1="247.500000" y1="925" x2="252.500000" y2="915" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="257.500000" cy="925" r="1" />
+<line x1="252.500000" y1="915" x2="257.500000" y2="925" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="262.500000" cy="920" r="1" />
+<line x1="257.500000" y1="925" x2="262.500000" y2="920" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="262.500000" y1="920" x2="300" y2="920" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="300" cy="920" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="250" y="910">R4</text>
+</g><circle id="pointA" cx="200" cy="950" r="1" />
+<circle id="pointA" cx="237.500000" cy="950" r="1" />
+<line x1="200" y1="950" x2="237.500000" y2="950" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="242.500000" cy="945" r="1" />
+<line x1="237.500000" y1="950" x2="242.500000" y2="945" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="247.500000" cy="955" r="1" />
+<line x1="242.500000" y1="945" x2="247.500000" y2="955" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="252.500000" cy="945" r="1" />
+<line x1="247.500000" y1="955" x2="252.500000" y2="945" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="257.500000" cy="955" r="1" />
+<line x1="252.500000" y1="945" x2="257.500000" y2="955" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="262.500000" cy="950" r="1" />
+<line x1="257.500000" y1="955" x2="262.500000" y2="950" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="262.500000" y1="950" x2="300" y2="950" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="300" cy="950" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="250" y="940">R4</text>
+</g><circle id="pointA" cx="200" cy="980" r="1" />
+<circle id="pointA" cx="237.500000" cy="980" r="1" />
+<line x1="200" y1="980" x2="237.500000" y2="980" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="242.500000" cy="975" r="1" />
+<line x1="237.500000" y1="980" x2="242.500000" y2="975" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="247.500000" cy="985" r="1" />
+<line x1="242.500000" y1="975" x2="247.500000" y2="985" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="252.500000" cy="975" r="1" />
+<line x1="247.500000" y1="985" x2="252.500000" y2="975" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="257.500000" cy="985" r="1" />
+<line x1="252.500000" y1="975" x2="257.500000" y2="985" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="262.500000" cy="980" r="1" />
+<line x1="257.500000" y1="985" x2="262.500000" y2="980" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="262.500000" y1="980" x2="300" y2="980" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="300" cy="980" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="250" y="970">R4</text>
+</g><circle id="pointA" cx="200" cy="1010" r="1" />
+<circle id="pointA" cx="237.500000" cy="1010" r="1" />
+<line x1="200" y1="1010" x2="237.500000" y2="1010" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="242.500000" cy="1005" r="1" />
+<line x1="237.500000" y1="1010" x2="242.500000" y2="1005" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="247.500000" cy="1015" r="1" />
+<line x1="242.500000" y1="1005" x2="247.500000" y2="1015" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="252.500000" cy="1005" r="1" />
+<line x1="247.500000" y1="1015" x2="252.500000" y2="1005" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="257.500000" cy="1015" r="1" />
+<line x1="252.500000" y1="1005" x2="257.500000" y2="1015" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="262.500000" cy="1010" r="1" />
+<line x1="257.500000" y1="1015" x2="262.500000" y2="1010" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="262.500000" y1="1010" x2="300" y2="1010" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="300" cy="1010" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="250" y="1000">R4</text>
+</g><circle id="pointA" cx="300" cy="920" r="1" />
+<circle id="pointA" cx="337.500000" cy="920" r="1" />
+<line x1="300" y1="920" x2="337.500000" y2="920" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="342.500000" cy="915" r="1" />
+<line x1="337.500000" y1="920" x2="342.500000" y2="915" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="347.500000" cy="925" r="1" />
+<line x1="342.500000" y1="915" x2="347.500000" y2="925" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="352.500000" cy="915" r="1" />
+<line x1="347.500000" y1="925" x2="352.500000" y2="915" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="357.500000" cy="925" r="1" />
+<line x1="352.500000" y1="915" x2="357.500000" y2="925" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="362.500000" cy="920" r="1" />
+<line x1="357.500000" y1="925" x2="362.500000" y2="920" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="362.500000" y1="920" x2="400" y2="920" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="400" cy="920" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="350" y="910">R6</text>
+</g><circle id="pointA" cx="1150" cy="920" r="1" />
+<circle id="pointA" cx="1187.500000" cy="920" r="1" />
+<line x1="1150" y1="920" x2="1187.500000" y2="920" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1192.500000" cy="915" r="1" />
+<line x1="1187.500000" y1="920" x2="1192.500000" y2="915" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1197.500000" cy="925" r="1" />
+<line x1="1192.500000" y1="915" x2="1197.500000" y2="925" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1202.500000" cy="915" r="1" />
+<line x1="1197.500000" y1="925" x2="1202.500000" y2="915" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1207.500000" cy="925" r="1" />
+<line x1="1202.500000" y1="915" x2="1207.500000" y2="925" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1212.500000" cy="920" r="1" />
+<line x1="1207.500000" y1="925" x2="1212.500000" y2="920" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="1212.500000" y1="920" x2="1250" y2="920" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1250" cy="920" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1200" y="910">R6</text>
+</g><circle cx="300.000000" cy="1040" r="10" stroke="black" stroke-width="2" fill="white" />
+<line x1="250" y1="1040" x2="290.000000" y2="1040" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="310.000000" y1="1040" x2="350" y2="1040" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="292.000000" y1="1040" x2="295.000000" y2="1040" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="305.000000" y1="1040" x2="308.000000" y2="1040" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="306.500000" y1="1038.500000" x2="306.500000" y2="1041.500000" style="stroke:rgb(0,0,0);stroke-width:1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="300" y="1030">I1</text>
+</g><circle id="pointA" cx="250" cy="1070" r="1" />
+<circle id="pointA" cx="287.500000" cy="1070" r="1" />
+<line x1="250" y1="1070" x2="287.500000" y2="1070" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="292.500000" cy="1065" r="1" />
+<line x1="287.500000" y1="1070" x2="292.500000" y2="1065" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="297.500000" cy="1075" r="1" />
+<line x1="292.500000" y1="1065" x2="297.500000" y2="1075" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="302.500000" cy="1065" r="1" />
+<line x1="297.500000" y1="1075" x2="302.500000" y2="1065" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="307.500000" cy="1075" r="1" />
+<line x1="302.500000" y1="1065" x2="307.500000" y2="1075" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="312.500000" cy="1070" r="1" />
+<line x1="307.500000" y1="1075" x2="312.500000" y2="1070" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="312.500000" y1="1070" x2="350" y2="1070" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="350" cy="1070" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="300" y="1060">R4</text>
+</g><circle id="pointA" cx="250" cy="1100" r="1" />
+<circle id="pointA" cx="287.500000" cy="1100" r="1" />
+<line x1="250" y1="1100" x2="287.500000" y2="1100" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="292.500000" cy="1095" r="1" />
+<line x1="287.500000" y1="1100" x2="292.500000" y2="1095" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="297.500000" cy="1105" r="1" />
+<line x1="292.500000" y1="1095" x2="297.500000" y2="1105" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="302.500000" cy="1095" r="1" />
+<line x1="297.500000" y1="1105" x2="302.500000" y2="1095" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="307.500000" cy="1105" r="1" />
+<line x1="302.500000" y1="1095" x2="307.500000" y2="1105" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="312.500000" cy="1100" r="1" />
+<line x1="307.500000" y1="1105" x2="312.500000" y2="1100" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="312.500000" y1="1100" x2="350" y2="1100" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="350" cy="1100" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="300" y="1090">R4</text>
+</g><circle id="pointA" cx="1200" cy="1040" r="1" />
+<circle id="pointA" cx="1237.500000" cy="1040" r="1" />
+<line x1="1200" y1="1040" x2="1237.500000" y2="1040" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1242.500000" cy="1035" r="1" />
+<line x1="1237.500000" y1="1040" x2="1242.500000" y2="1035" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1247.500000" cy="1045" r="1" />
+<line x1="1242.500000" y1="1035" x2="1247.500000" y2="1045" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1252.500000" cy="1035" r="1" />
+<line x1="1247.500000" y1="1045" x2="1252.500000" y2="1035" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1257.500000" cy="1045" r="1" />
+<line x1="1252.500000" y1="1035" x2="1257.500000" y2="1045" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1262.500000" cy="1040" r="1" />
+<line x1="1257.500000" y1="1045" x2="1262.500000" y2="1040" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="1262.500000" y1="1040" x2="1300" y2="1040" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1300" cy="1040" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1250" y="1030">R6</text>
+</g><circle cx="225.000000" cy="1130" r="10" stroke="black" stroke-width="2" fill="white" />
+<line x1="200" y1="1130" x2="215.000000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="235.000000" y1="1130" x2="250" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<path d="M 225.000000 1130 q 2.5 -5 5 0" stroke="black" stroke-width="2" fill="none" />
+<path d="M 220.000000 1130 q 2.5 5 5 0" stroke="black" stroke-width="2" fill="none" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="225" y="1120">V1</text>
+</g><circle id="pointA" cx="250" cy="1130" r="1" />
+<circle id="pointA" cx="262.500000" cy="1130" r="1" />
+<line x1="250" y1="1130" x2="262.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="267.500000" cy="1125" r="1" />
+<line x1="262.500000" y1="1130" x2="267.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="272.500000" cy="1135" r="1" />
+<line x1="267.500000" y1="1125" x2="272.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="277.500000" cy="1125" r="1" />
+<line x1="272.500000" y1="1135" x2="277.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="282.500000" cy="1135" r="1" />
+<line x1="277.500000" y1="1125" x2="282.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="287.500000" cy="1130" r="1" />
+<line x1="282.500000" y1="1135" x2="287.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="287.500000" y1="1130" x2="300" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="300" cy="1130" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="275" y="1120">R1</text>
+</g><circle id="pointA" cx="300" cy="1130" r="1" />
+<circle id="pointA" cx="312.500000" cy="1130" r="1" />
+<line x1="300" y1="1130" x2="312.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="317.500000" cy="1125" r="1" />
+<line x1="312.500000" y1="1130" x2="317.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="322.500000" cy="1135" r="1" />
+<line x1="317.500000" y1="1125" x2="322.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="327.500000" cy="1125" r="1" />
+<line x1="322.500000" y1="1135" x2="327.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="332.500000" cy="1135" r="1" />
+<line x1="327.500000" y1="1125" x2="332.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="337.500000" cy="1130" r="1" />
+<line x1="332.500000" y1="1135" x2="337.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="337.500000" y1="1130" x2="350" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="350" cy="1130" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="325" y="1120">R2</text>
+</g><circle id="pointA" cx="350" cy="1130" r="1" />
+<circle id="pointA" cx="362.500000" cy="1130" r="1" />
+<line x1="350" y1="1130" x2="362.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="367.500000" cy="1125" r="1" />
+<line x1="362.500000" y1="1130" x2="367.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="372.500000" cy="1135" r="1" />
+<line x1="367.500000" y1="1125" x2="372.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="377.500000" cy="1125" r="1" />
+<line x1="372.500000" y1="1135" x2="377.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="382.500000" cy="1135" r="1" />
+<line x1="377.500000" y1="1125" x2="382.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="387.500000" cy="1130" r="1" />
+<line x1="382.500000" y1="1135" x2="387.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="387.500000" y1="1130" x2="400" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="400" cy="1130" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="375" y="1120">R3</text>
+</g><circle id="pointA" cx="350" cy="1160" r="1" />
+<circle id="pointA" cx="362.500000" cy="1160" r="1" />
+<line x1="350" y1="1160" x2="362.500000" y2="1160" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="367.500000" cy="1155" r="1" />
+<line x1="362.500000" y1="1160" x2="367.500000" y2="1155" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="372.500000" cy="1165" r="1" />
+<line x1="367.500000" y1="1155" x2="372.500000" y2="1165" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="377.500000" cy="1155" r="1" />
+<line x1="372.500000" y1="1165" x2="377.500000" y2="1155" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="382.500000" cy="1165" r="1" />
+<line x1="377.500000" y1="1155" x2="382.500000" y2="1165" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="387.500000" cy="1160" r="1" />
+<line x1="382.500000" y1="1165" x2="387.500000" y2="1160" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="387.500000" y1="1160" x2="400" y2="1160" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="400" cy="1160" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="375" y="1150">R3</text>
+</g><circle id="pointA" cx="350" cy="1190" r="1" />
+<circle id="pointA" cx="362.500000" cy="1190" r="1" />
+<line x1="350" y1="1190" x2="362.500000" y2="1190" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="367.500000" cy="1185" r="1" />
+<line x1="362.500000" y1="1190" x2="367.500000" y2="1185" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="372.500000" cy="1195" r="1" />
+<line x1="367.500000" y1="1185" x2="372.500000" y2="1195" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="377.500000" cy="1185" r="1" />
+<line x1="372.500000" y1="1195" x2="377.500000" y2="1185" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="382.500000" cy="1195" r="1" />
+<line x1="377.500000" y1="1185" x2="382.500000" y2="1195" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="387.500000" cy="1190" r="1" />
+<line x1="382.500000" y1="1195" x2="387.500000" y2="1190" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="387.500000" y1="1190" x2="400" y2="1190" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="400" cy="1190" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="375" y="1180">R3</text>
+</g><circle id="pointA" cx="350" cy="1220" r="1" />
+<circle id="pointA" cx="362.500000" cy="1220" r="1" />
+<line x1="350" y1="1220" x2="362.500000" y2="1220" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="367.500000" cy="1215" r="1" />
+<line x1="362.500000" y1="1220" x2="367.500000" y2="1215" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="372.500000" cy="1225" r="1" />
+<line x1="367.500000" y1="1215" x2="372.500000" y2="1225" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="377.500000" cy="1215" r="1" />
+<line x1="372.500000" y1="1225" x2="377.500000" y2="1215" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="382.500000" cy="1225" r="1" />
+<line x1="377.500000" y1="1215" x2="382.500000" y2="1225" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="387.500000" cy="1220" r="1" />
+<line x1="382.500000" y1="1225" x2="387.500000" y2="1220" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="387.500000" y1="1220" x2="400" y2="1220" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="400" cy="1220" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="375" y="1210">R3</text>
+</g><circle cx="675.000000" cy="1130" r="10" stroke="black" stroke-width="2" fill="white" />
+<line x1="650" y1="1130" x2="665.000000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="685.000000" y1="1130" x2="700" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<path d="M 675.000000 1130 q 2.5 -5 5 0" stroke="black" stroke-width="2" fill="none" />
+<path d="M 670.000000 1130 q 2.5 5 5 0" stroke="black" stroke-width="2" fill="none" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="675" y="1120">V1</text>
+</g><circle id="pointA" cx="750" cy="1130" r="1" />
+<circle id="pointA" cx="762.500000" cy="1130" r="1" />
+<line x1="750" y1="1130" x2="762.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="767.500000" cy="1125" r="1" />
+<line x1="762.500000" y1="1130" x2="767.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="772.500000" cy="1135" r="1" />
+<line x1="767.500000" y1="1125" x2="772.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="777.500000" cy="1125" r="1" />
+<line x1="772.500000" y1="1135" x2="777.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="782.500000" cy="1135" r="1" />
+<line x1="777.500000" y1="1125" x2="782.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="787.500000" cy="1130" r="1" />
+<line x1="782.500000" y1="1135" x2="787.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="787.500000" y1="1130" x2="800" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="800" cy="1130" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="775" y="1120">R1</text>
+</g><circle id="pointA" cx="1100" cy="1130" r="1" />
+<circle id="pointA" cx="1112.500000" cy="1130" r="1" />
+<line x1="1100" y1="1130" x2="1112.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1117.500000" cy="1125" r="1" />
+<line x1="1112.500000" y1="1130" x2="1117.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1122.500000" cy="1135" r="1" />
+<line x1="1117.500000" y1="1125" x2="1122.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1127.500000" cy="1125" r="1" />
+<line x1="1122.500000" y1="1135" x2="1127.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1132.500000" cy="1135" r="1" />
+<line x1="1127.500000" y1="1125" x2="1132.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1137.500000" cy="1130" r="1" />
+<line x1="1132.500000" y1="1135" x2="1137.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="1137.500000" y1="1130" x2="1150" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1150" cy="1130" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1125" y="1120">R6</text>
+</g><circle id="pointA" cx="1200" cy="1130" r="1" />
+<circle id="pointA" cx="1212.500000" cy="1130" r="1" />
+<line x1="1200" y1="1130" x2="1212.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1217.500000" cy="1125" r="1" />
+<line x1="1212.500000" y1="1130" x2="1217.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1222.500000" cy="1135" r="1" />
+<line x1="1217.500000" y1="1125" x2="1222.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1227.500000" cy="1125" r="1" />
+<line x1="1222.500000" y1="1135" x2="1227.500000" y2="1125" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1232.500000" cy="1135" r="1" />
+<line x1="1227.500000" y1="1125" x2="1232.500000" y2="1135" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1237.500000" cy="1130" r="1" />
+<line x1="1232.500000" y1="1135" x2="1237.500000" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<line x1="1237.500000" y1="1130" x2="1250" y2="1130" style="stroke:rgb(0,0,0);stroke-width:2" />
+<circle id="pointA" cx="1250" cy="1130" r= " 1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1225" y="1120">R6</text>
+</g><line x1="200" y1="200" x2="200" y2="1220" style="stroke:rgb(0,0,0);stroke-width:2.000000" />
+<circle id="pointA" cx="200" cy="200" r="1" />
+<circle id="pointA" cx="200" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="200" y="1250">NET0</text>
+</g><line x1="250" y1="200" x2="250" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="250" cy="200" r="1" />
+<circle id="pointA" cx="250" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="250" y="1250">NET1</text>
+</g><line x1="300" y1="200" x2="300" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="300" cy="200" r="1" />
+<circle id="pointA" cx="300" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="300" y="1250">NET2</text>
+</g><line x1="350" y1="200" x2="350" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="350" cy="200" r="1" />
+<circle id="pointA" cx="350" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="350" y="1250">NET3</text>
+</g><line x1="400" y1="200" x2="400" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="400" cy="200" r="1" />
+<circle id="pointA" cx="400" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="400" y="1250">NET4</text>
+</g><line x1="450" y1="200" x2="450" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="450" cy="200" r="1" />
+<circle id="pointA" cx="450" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="450" y="1250">NET5</text>
+</g><line x1="500" y1="200" x2="500" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="500" cy="200" r="1" />
+<circle id="pointA" cx="500" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="500" y="1250">NET6</text>
+</g><line x1="550" y1="200" x2="550" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="550" cy="200" r="1" />
+<circle id="pointA" cx="550" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="550" y="1250">NET7</text>
+</g><line x1="600" y1="200" x2="600" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="600" cy="200" r="1" />
+<circle id="pointA" cx="600" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="600" y="1250">NET8</text>
+</g><line x1="650" y1="200" x2="650" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="650" cy="200" r="1" />
+<circle id="pointA" cx="650" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="650" y="1250">NET9</text>
+</g><line x1="700" y1="200" x2="700" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="700" cy="200" r="1" />
+<circle id="pointA" cx="700" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="700" y="1250">NET10</text>
+</g><line x1="750" y1="200" x2="750" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="750" cy="200" r="1" />
+<circle id="pointA" cx="750" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="750" y="1250">NET11</text>
+</g><line x1="800" y1="200" x2="800" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="800" cy="200" r="1" />
+<circle id="pointA" cx="800" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="800" y="1250">NET12</text>
+</g><line x1="850" y1="200" x2="850" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="850" cy="200" r="1" />
+<circle id="pointA" cx="850" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="850" y="1250">NET13</text>
+</g><line x1="900" y1="200" x2="900" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="900" cy="200" r="1" />
+<circle id="pointA" cx="900" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="900" y="1250">NET14</text>
+</g><line x1="950" y1="200" x2="950" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="950" cy="200" r="1" />
+<circle id="pointA" cx="950" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="950" y="1250">NET15</text>
+</g><line x1="1000" y1="200" x2="1000" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="1000" cy="200" r="1" />
+<circle id="pointA" cx="1000" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1000" y="1250">NET16</text>
+</g><line x1="1050" y1="200" x2="1050" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="1050" cy="200" r="1" />
+<circle id="pointA" cx="1050" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1050" y="1250">NET17</text>
+</g><line x1="1100" y1="200" x2="1100" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="1100" cy="200" r="1" />
+<circle id="pointA" cx="1100" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1100" y="1250">NET18</text>
+</g><line x1="1150" y1="200" x2="1150" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="1150" cy="200" r="1" />
+<circle id="pointA" cx="1150" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1150" y="1250">NET19</text>
+</g><line x1="1200" y1="200" x2="1200" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="1200" cy="200" r="1" />
+<circle id="pointA" cx="1200" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1200" y="1250">NET20</text>
+</g><line x1="1250" y1="200" x2="1250" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="1250" cy="200" r="1" />
+<circle id="pointA" cx="1250" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1250" y="1250">NET21</text>
+</g><line x1="1300" y1="200" x2="1300" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="1300" cy="200" r="1" />
+<circle id="pointA" cx="1300" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1300" y="1250">NET22</text>
+</g><line x1="1350" y1="200" x2="1350" y2="1220" style="stroke:rgb(0,0,0);stroke-width:0.500000" />
+<circle id="pointA" cx="1350" cy="200" r="1" />
+<circle id="pointA" cx="1350" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1350" y="1250">NET23</text>
+</g><line x1="1400" y1="200" x2="1400" y2="1220" style="stroke:rgb(0,0,0);stroke-width:2.000000" />
+<circle id="pointA" cx="1400" cy="200" r="1" />
+<circle id="pointA" cx="1400" cy="1220" r="1" /><g font-size="10" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+<text x="1400" y="1250">NET24</text>
+</g>
+</svg>
