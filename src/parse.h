@@ -16,6 +16,8 @@ struct element{
     char* unit;
     
     complex <double> current, voltage, admittance; // the part required for solving the circuit 
+    complex <double> netCurrent, netVoltage; // superposition of currents and voltages due to all source 
+    double curPhase, volPhase;
     double valWithUnit;  
 };
 
@@ -28,6 +30,8 @@ struct source{
     
     // currently assuming dcOffset = 0 
     complex <double> current, voltage; // part required for solving the circuit 
+    complex <double> netCurrent, netVoltage; // superposition of currents and voltages due to all source 
+    double curPhase, volPhase;
 };
 
 // the vector storing the element/source connections

@@ -16,7 +16,8 @@ struct component{
     char* name;
     int num, netStart, netEnd;
     double value; 
-    complex <double> current, voltage; 
+    complex <double> current, voltage;
+    double cPhase, vPhase; 
     bool updated; // tells whether netStart and netEnd are swapped or not  
 };
 
@@ -25,35 +26,49 @@ bool orderByNetEnd(const component &a, const component &b){
     return a.netEnd <= b.netEnd; // two components CAN have the same netEnd since THEN their diff between netEnds is same in the vector
 }
 
-inline void drawComponent(char name, int num, bool updated, int xCor1, int yCor, int xCor2, int cmax = 0){
+// function for rounding decimal upto 3 places 
+inline double roundMe(double val){
+    double val_mul_1000 = val * 1000.0;
+    if(val_mul_1000 < 0){
+        val_mul_1000 = ceil(val_mul_1000 - 0.5);
+    }
+    else{
+        val_mul_1000 = floor(val_mul_1000 + 0.5);
+    }
+    return val_mul_1000/1000.0 ; 
+}
+
+inline void drawComponent(component c, int xCor1, int yCor, int xCor2, int cmax = 0){
+    char name = c.name[0];
+    int num = c.num;
+    bool updated = c.updated;
     switch(name){
         case 'R':
                 drawResistor(xCor1, yCor + cmax*30, xCor2);
-                drawText("R"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10);
+                drawText("R"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10, c.value, roundMe(abs(c.current)), roundMe(abs(c.voltage)), c.cPhase, c.vPhase);
                 break;
         case 'L':
                 drawInductor(xCor1, yCor + cmax*30, xCor2);
-                drawText("L"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10);
+                drawText("L"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10, c.value, roundMe(abs(c.current)), roundMe(abs(c.voltage)), c.cPhase, c.vPhase);
                 break;
         case 'C':
                 drawCapacitor(xCor1, yCor + cmax*30, xCor2);
-                drawText("C"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10);
+                drawText("C"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10, c.value, roundMe(abs(c.current)), roundMe(abs(c.voltage)), c.cPhase, c.vPhase);
                 break;
         case 'V':
                 drawVoltage(xCor1, yCor + cmax*30, xCor2);
-                drawText("V"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10);
+                drawText("V"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10, c.value, roundMe(abs(c.current)), roundMe(abs(c.voltage)), c.cPhase, c.vPhase);
                 break;
         case 'I':
                 drawCurrent(xCor1, yCor, xCor2, updated); // draw +ve at ns and -ve at ne
-                drawText("I"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10);
+                drawText("I"+to_string(num),(xCor1 + xCor2)/2, yCor + cmax*30 - 10, c.value, roundMe(abs(c.current)), roundMe(abs(c.voltage)), c.cPhase, c.vPhase);
                 break;
     }
 }
 
-void drawMain(string fileName, int N, vector <element> el, vector <source> cs, vector <source> vs){
+void drawMain(string fileName, int N, vector <element> el, vector <source> so){
     int E = el.size(); // total number of circuit elements 
-    int VS = vs.size(); // total no of voltage sources 
-    int CS = cs.size(); // total no of current sources 
+    int S = so.size(); // total no of sources 
     
     int distBWnets = 50 ; // fixed 
     int xNets[N]; // x coordinates of nets
@@ -63,7 +78,7 @@ void drawMain(string fileName, int N, vector <element> el, vector <source> cs, v
         xNets[i] = xNets[i-1] + distBWnets;
     }
     
-    int height = 200 + 30*(E + VS + CS) + 40 ; // this is the max possible height, all connections in parallel, each connection has height of around 30, extra 40 for text 
+    int height = 200 + 30*(E + S) + 40 ; // this is the max possible height, all connections in parallel, each connection has height of around 30, extra 40 for text 
     int width = xNets[N-1] + 100; // maximum width of the screen 
     start(fileName, height, width);
     
@@ -77,8 +92,10 @@ void drawMain(string fileName, int N, vector <element> el, vector <source> cs, v
         c.name      =   el[i].elementName;
         c.num       =   el[i].elementNum;
         c.value     =   el[i].valWithUnit;
-        c.current   =   el[i].current;
-        c.voltage   =   el[i].voltage;
+        c.current   =   el[i].netCurrent;
+        c.voltage   =   el[i].netVoltage;
+        c.cPhase    =   el[i].curPhase;
+        c.vPhase    =   el[i].volPhase;
         int ns = el[i].netStart, ne = el[i].netEnd;
         if(ns > ne){
             swap(ns, ne);
@@ -90,29 +107,15 @@ void drawMain(string fileName, int N, vector <element> el, vector <source> cs, v
         ordByNetDiff[diff].push_back(c);
     }
     
-    for(int i = 0 ; i < VS ; i ++){
-        c.name      =   vs[i].sourceName;
-        c.num       =   vs[i].sourceNum;
-        c.value     =   vs[i].amplitude;
-        c.current   =   vs[i].current;
-        c.voltage   =   vs[i].voltage;
-        int ns = vs[i].netStart, ne = vs[i].netEnd;
-        if(ns > ne){
-            swap(ns, ne);
-            c.updated = 1;
-        }
-        int diff = ne - ns;
-        c.netStart  =   ns;
-        c.netEnd    =   ne;
-        ordByNetDiff[diff].push_back(c);
-    }
-    for(int i = 0 ; i < CS ; i ++){
-        c.name      =   cs[i].sourceName;
-        c.num       =   cs[i].sourceNum;
-        c.value     =   cs[i].amplitude;
-        c.current   =   cs[i].current;
-        c.voltage   =   cs[i].voltage;
-        int ns = cs[i].netStart, ne = cs[i].netEnd; 
+    for(int i = 0 ; i < S ; i ++){
+        c.name      =   so[i].sourceName;
+        c.num       =   so[i].sourceNum;
+        c.value     =   so[i].amplitude;
+        c.current   =   so[i].netCurrent;
+        c.voltage   =   so[i].netVoltage;
+        c.cPhase    =   so[i].curPhase;
+        c.vPhase    =   so[i].volPhase;
+        int ns = so[i].netStart, ne = so[i].netEnd;
         if(ns > ne){
             swap(ns, ne);
             c.updated = 1;
@@ -172,7 +175,7 @@ void drawMain(string fileName, int N, vector <element> el, vector <source> cs, v
             xCor1 = xNets[ns], xCor2 = xNets[ne];
             yCor = yNet;
             // cout << "Drawing " << name << ": " << ns << " to " << ne << "\n";
-            drawComponent(name, c.num, c.updated, xCor1, yCor, xCor2);
+            drawComponent(c, xCor1, yCor, xCor2);
             visitedC[startC] = 1;
             countedC ++;
             int cmax = 1; // for one iteration, the current max between current ns and ne 
@@ -189,7 +192,7 @@ void drawMain(string fileName, int N, vector <element> el, vector <source> cs, v
                         // we won't change yNet but while drawing, we use an incrementer for yNet
                         
                         // cout << "Drawing " << name << ": " << ns << " to " << ne << "\n";
-                        drawComponent(name, c.num, c.updated, xCor1, yCor, xCor2, cmax);
+                        drawComponent(c, xCor1, yCor, xCor2, cmax);
                         visitedC[j] = 1;
                         countedC ++;
                         cmax ++;
@@ -206,7 +209,7 @@ void drawMain(string fileName, int N, vector <element> el, vector <source> cs, v
                         name = c.name[0];
                         xCor1 = xNets[ns], xCor2 = xNets[ne];
                         // cout << "Drawing " << name << ": " << ns << " to " << ne << "\n";
-                        drawComponent(name, c.num, c.updated, xCor1, yCor, xCor2);
+                        drawComponent(c, xCor1, yCor, xCor2);
                         visitedC[j] = 1;
                         countedC ++;
                     }
@@ -230,7 +233,7 @@ void drawMain(string fileName, int N, vector <element> el, vector <source> cs, v
         else
             drawVerticalLine(xNets[i], yStart, yEnd, 0.5);
         string res = "NET"+to_string(i);
-        drawText(res, xNets[i], yEnd + 30);
+        drawText(res, xNets[i], yEnd + 30, 0, 0, 0, 0, 0);
     }
     end();
 }

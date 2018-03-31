@@ -190,6 +190,8 @@ void drawCurrent(int X1, int Y1, int X2, bool np) {
     fout << res;
 
 }
+
+
 void drawInductor(int X1, int Y1, int X2) {       // minimum 30
     float pt = X2 - X1;
     pt = pt - 20;
@@ -225,24 +227,29 @@ void drawInductor(int X1, int Y1, int X2) {       // minimum 30
     fout << res;
 }
 
-void drawText(string txt, int X1, int Y1) {
+void drawText(string txt, int X1, int Y1, double val, double cur, double vol, double cPhase, double vPhase) {
     string res;
     
     res = "<g font-size=\"" + to_string(10) +
           "\" font-family=\"sans-serif\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\">" +
-          "\n<text x=\"" + to_string(X1) + "\" y=\"" + to_string(Y1) + "\">"+txt+"</text>" +
+          "\n<text x=\"" + to_string(X1) + "\" y=\"" + to_string(Y1) + "\" onClick=\"showResult("+to_string(val)+","+to_string(cur)+","+to_string(vol)+","+to_string(cPhase)+","+to_string(vPhase)+")\">"+txt+"</text>" +
           "\n</g>";
     fout << res;
 }
 
+void addInteraction(){
+    fout << " <script type=\"text/JavaScript\"> <![CDATA[ function showResult(val, cur, vol, cPhase, vPhase) { alert(\"Value: \"+ val + \", Current: \"+ cur + \"<\"+ cPhase + \">, Voltage: \"+ vol + \"<\"+ vPhase + \">\"); } ]]> </script> ";
+}
+
 void start(string fileName, int h, int w) {
-    fout.open(fileName);
+    fout.open(fileName+".html");
+    fout << "<html> <title> Circuit Drawer </title> <body>";
     fout << "<svg height=\"" << to_string(h) << "\" width= \"" << to_string(w)
          << "\" xmlns=\"http://www.w3.org/2000/svg\">";
+    addInteraction();
 }
 
 void end() {
-    fout << "\n</svg>";
+    fout << "\n</svg> </body> </html>";
     fout.close();
 }
-

@@ -149,10 +149,6 @@ int main(int argc, char** argv){
         VoltageNode.push_back(temp);
     }
     
-    // call the main draw function to render netlist as svg 
-    drawMain(fileNameSVG, totalNodes + 1, circuitElements, iSource, vSource);
-    // since 0 is not included in totalNodes
-    
     // now we will use the Eigen library functions to construct the required matrices in the modified nodal analysis method 
     
     /* for interconnections between passive circuit elements */
@@ -397,6 +393,7 @@ int main(int argc, char** argv){
             fout << circuitElements[i].elementName[0] << circuitElements[i].elementNum << " ";
             complex <double> voltDiff = VoltageNode[ns] - VoltageNode[ne];
             circuitElements[i].voltage = voltDiff; // to be used in current computation 
+            circuitElements[i].netVoltage += voltDiff;
             fout << round_3(abs(voltDiff)) << " " << round_3(phase(voltDiff)) << "\n";
         }
         if(sameFreqCount == 1)
@@ -414,6 +411,7 @@ int main(int argc, char** argv){
             else
                 voltDiff = VoltageNode[ns] - VoltageNode[ne];
             sourceElements[T1].voltage = voltDiff;
+            sourceElements[T1].netVoltage += voltDiff;
             fout << round_3(abs(voltDiff)) << " " << round_3(phase(voltDiff)) << "\n"; 
         }       
         
@@ -422,6 +420,7 @@ int main(int argc, char** argv){
         for(int i = 0 ; i < circuitElements.size(); i ++){
             complex<double> res = circuitElements[i].voltage * circuitElements[i].admittance;
             circuitElements[i].current = res;
+            circuitElements[i].netCurrent += res;
             fout << circuitElements[i].elementName[0] << circuitElements[i].elementNum << " ";
             fout << round_3(abs(res)) << " " << round_3(phase(res)) << "\n";
         }
@@ -444,10 +443,25 @@ int main(int argc, char** argv){
                         break;
             }
             sourceElements[T1].current = res;
+            sourceElements[T1].netCurrent += res;
             fout << round_3(abs(res)) << " " << round_3(phase(res)) << "\n";    
         }    
         T += sameFreqCount - 1; // so that same sources are not considered again 
     }
     fout.close();
+    
+    // calculate current and voltage phases and store for helping in draw
+    for(int i = 0 ; i < sourceElements.size(); i ++){
+        sourceElements[i].curPhase = round_3(phase(sourceElements[i].netCurrent));
+        sourceElements[i].volPhase = round_3(phase(sourceElements[i].netVoltage));
+    }
+    for(int i = 0 ; i < circuitElements.size(); i ++){
+        circuitElements[i].curPhase = round_3(phase(circuitElements[i].netCurrent));
+        circuitElements[i].volPhase = round_3(phase(circuitElements[i].netVoltage));
+    }
+    
+    // call the main draw function to render netlist as svg after calcuating net currents and voltages
+    drawMain(fileNameSVG, totalNodes + 1, circuitElements, sourceElements);
+    
     return 0;
 }

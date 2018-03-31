@@ -17,4 +17,6 @@ void drawInductor(int X1, int Y1, int X2);
 // vertical drawer functions 
 void drawVerticalLine(int X1, int Y1, int Y2, float width); // width specified to adjust nets 0 and N-1 
 // text drawing
-void drawText(string txt, int X1, int Y1);
+void drawText(string txt, int X1, int Y1, double val, double cur, double vol, double cPhase, double vPhase);
+
+void addInteraction();
